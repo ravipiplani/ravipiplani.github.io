@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safexpress x Rhobots - AI Automation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .presentation {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: none;
+            padding: 60px;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Header with logos */
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .logo {
+            height: 60px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .separator {
+            font-size: 40px;
+            color: #ccc;
+            font-weight: 100;
+        }
+
+        /* Background geometric shapes */
+        .bg-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            opacity: 0.1;
+        }
+
+        .shape {
+            position: absolute;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #008751, #00BCD4);
+        }
+
+        .diamond {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #1E9DD7, #00BCD4);
+            transform: rotate(45deg);
+        }
+
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 173px solid #008751;
+        }
+
+        /* Content area */
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            color: #3d3d3d;
+            margin-bottom: 30px;
+            font-weight: 700;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        h2 {
+            font-size: 2em;
+            color: #008751;
+            margin-bottom: 20px;
+            font-weight: 600;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            color: #666;
+            margin-bottom: 40px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .big-question {
+            font-size: 2.2em;
+            color: #3d3d3d;
+            font-weight: 600;
+            max-width: 900px;
+            line-height: 1.4;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .big-question.show {
+            opacity: 1;
+            transform: translateY(0);
+            animation: pulse 3s ease-in-out infinite 0.8s;
+        }
+
+        .bullet-list {
+            text-align: left;
+            max-width: 800px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .bullet-item {
+            display: none;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .bullet-item.show {
+            display: flex;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .bullet-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .icon {
+            font-size: 2.5em;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .bullet-text {
+            font-size: 1.3em;
+            color: #3d3d3d;
+            line-height: 1.6;
+        }
+
+        /* Product cards */
+        .product-cards {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .product-card {
+            flex: 1;
+            min-width: 300px;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: transform 0.8s ease, box-shadow 0.3s ease, opacity 0.8s ease;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .product-card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .product-card:nth-child(1) { border-top: 5px solid #00BCD4; }
+        .product-card:nth-child(2) { border-top: 5px solid #008751; }
+        .product-card:nth-child(3) { border-top: 5px solid #1E9DD7; }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-card.show:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Combining animation */
+        .product-card.combining {
+            transition: transform 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55),
+                        opacity 1.2s ease,
+                        filter 1.2s ease;
+        }
+
+        .product-card.combine-to-center {
+            transform: translate(0, 0) scale(0.1);
+            opacity: 0;
+            filter: blur(10px);
+            pointer-events: none;
+        }
+
+        .product-cards.hiding {
+            transition: opacity 0.5s ease, height 0.5s ease;
+            opacity: 0;
+            pointer-events: none;
+            height: 0;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        .operator-card {
+            display: none;
+            padding: 50px;
+            background: linear-gradient(135deg, #008751, #00BCD4);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            color: white;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: opacity 1s ease, transform 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .operator-card.show {
+            display: block;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .operator-icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .operator-title {
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .operator-subtitle {
+            font-size: 1.5em;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .operator-features {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .operator-feature {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1.2em;
+            backdrop-filter: blur(10px);
+        }
+
+        .product-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .product-name {
+            font-size: 2em;
+            color: #3d3d3d;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .product-tagline {
+            font-size: 1.2em;
+            color: #008751;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .product-desc {
+            font-size: 1.1em;
+            color: #666;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        .product-desc li {
+            margin-bottom: 10px;
+        }
+
+        .footer-line {
+            margin-top: 40px;
+            font-size: 1.3em;
+            color: #1E9DD7;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .footer-line.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Demo slide */
+        .demo-message {
+            font-size: 3.5em;
+            color: #3d3d3d;
+            font-weight: 700;
+            text-align: center;
+            padding: 60px;
+            background: linear-gradient(135deg, rgba(0, 135, 81, 0.1), rgba(30, 157, 215, 0.1));
+            border-radius: 30px;
+            border: 5px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .demo-message.show {
+            opacity: 1;
+            transform: scale(1);
+            animation: pulse 2s ease-in-out infinite 0.8s;
+        }
+
+        .demo-message::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 30px;
+            padding: 5px;
+            background: linear-gradient(135deg, #008751, #00BCD4);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+        }
+
+        /* Demo slide */
+        .demo-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1000px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .flow-step {
+            flex: 1;
+            padding: 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 1.4s ease-out backwards;
+            position: relative;
+        }
+
+        .flow-step:nth-child(1) { animation-delay: 0.2s; }
+        .flow-step:nth-child(2) { animation-delay: 0.4s; }
+        .flow-step:nth-child(3) { animation-delay: 0.6s; }
+
+        .flow-arrow {
+            font-size: 3em;
+            color: #008751;
+            animation: fadeInUp 1.5s ease-out backwards;
+        }
+
+        .flow-arrow:nth-child(2) { animation-delay: 0.5s; }
+        .flow-arrow:nth-child(4) { animation-delay: 0.7s; }
+
+        .step-number {
+            font-size: 3em;
+            color: #00BCD4;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .step-name {
+            font-size: 1.5em;
+            color: #3d3d3d;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .step-desc {
+            font-size: 1em;
+            color: #666;
+        }
+
+        /* Navigation */
+        .nav-controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #008751, #00BCD4);
+            color: white;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        .slide-counter {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            font-size: 1.2em;
+            color: #666;
+            background: white;
+            padding: 15px 25px;
+            border-radius: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        /* Highlight text */
+        .highlight {
+            color: #008751;
+            font-weight: 700;
+        }
+
+        .highlight-blue {
+            color: #1E9DD7;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- Slide 0: Context & Objective -->
+        <div class="slide active" data-slide="0">
+            <div class="bg-shapes">
+                <div class="shape circle" style="top: 10%; left: 5%;"></div>
+                <div class="shape diamond" style="top: 60%; right: 10%;"></div>
+                <div class="shape triangle" style="bottom: 10%; left: 15%;"></div>
+            </div>
+
+            <div class="slide-header">
+                <div class="logo-container">
+                    <img src="../images/safexpress.png" alt="Safexpress" class="logo">
+                    <span class="separator">×</span>
+                    <img src="../images/rhobots.png" alt="Rhobots" class="logo">
+                </div>
+            </div>
+
+            <div class="content">
+                <h2>Context & Objective</h2>
+                <div class="big-question" data-step="0">
+                    "How do we make manual data processes error-free and autonomous?"
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 1: The Problem -->
+        <div class="slide" data-slide="1">
+            <div class="bg-shapes">
+                <div class="shape diamond" style="top: 15%; right: 5%; animation-delay: 1s;"></div>
+                <div class="shape circle" style="bottom: 20%; left: 10%; animation-delay: 2s;"></div>
+            </div>
+
+            <div class="slide-header">
+                <div class="logo-container">
+                    <img src="../images/safexpress.png" alt="Safexpress" class="logo">
+                    <span class="separator">×</span>
+                    <img src="../images/rhobots.png" alt="Rhobots" class="logo">
+                </div>
+            </div>
+
+            <div class="content">
+                <h1>The Problem</h1>
+                <h2>Manual Data Entry: High Effort, High Risk</h2>
+
+                <div class="bullet-list">
+                    <div class="bullet-item" data-step="0">
+                        <div class="icon">⚠️</div>
+                        <div class="bullet-text">Heavy dependency on <span class="highlight">human-driven data entry</span></div>
+                    </div>
+                    <div class="bullet-item" data-step="1">
+                        <div class="icon">📝</div>
+                        <div class="bullet-text">Tasks like contract updates, custom rate mapping, credit notes</div>
+                    </div>
+                    <div class="bullet-item" data-step="2">
+                        <div class="icon">🐌</div>
+                        <div class="bullet-text"><span class="highlight">Slow, repetitive, error-prone</span> processes</div>
+                    </div>
+                    <div class="bullet-item" data-step="3">
+                        <div class="icon">🔄</div>
+                        <div class="bullet-text">Errors trigger long rework cycles → <span class="highlight">delays & operational friction</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Why Traditional Automation Fails -->
+        <div class="slide" data-slide="2">
+            <div class="bg-shapes">
+                <div class="shape triangle" style="top: 20%; right: 15%; animation-delay: 0.5s;"></div>
+                <div class="shape diamond" style="bottom: 15%; left: 5%; animation-delay: 1.5s;"></div>
+            </div>
+
+            <div class="slide-header">
+                <div class="logo-container">
+                    <img src="../images/safexpress.png" alt="Safexpress" class="logo">
+                    <span class="separator">×</span>
+                    <img src="../images/rhobots.png" alt="Rhobots" class="logo">
+                </div>
+            </div>
+
+            <div class="content">
+                <h1>Why Traditional Automation Fails</h1>
+                <h2>Challenges with Legacy Automation</h2>
+
+                <div class="bullet-list">
+                    <div class="bullet-item" data-step="0">
+                        <div class="icon">🔒</div>
+                        <div class="bullet-text">Modern authentication <span class="highlight">(MFA, conditional access)</span> blocks traditional scripts</div>
+                    </div>
+                    <div class="bullet-item" data-step="1">
+                        <div class="icon">🔗</div>
+                        <div class="bullet-text">High interdependency of fields → <span class="highlight">humans decide on the fly</span></div>
+                    </div>
+                    <div class="bullet-item" data-step="2">
+                        <div class="icon">❌</div>
+                        <div class="bullet-text"><span class="highlight">Rigid automations fail</span> in dynamic workflows</div>
+                    </div>
+                    <div class="bullet-item" data-step="3">
+                        <div class="icon">💸</div>
+                        <div class="bullet-text">High <span class="highlight">maintenance cost</span> for scripted bots</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Our Approach -->
+        <div class="slide" data-slide="3">
+            <div class="bg-shapes">
+                <div class="shape circle" style="top: 5%; right: 10%; animation-delay: 0.3s;"></div>
+                <div class="shape diamond" style="top: 50%; left: 5%; animation-delay: 1s;"></div>
+                <div class="shape triangle" style="bottom: 5%; right: 15%; animation-delay: 1.7s;"></div>
+            </div>
+
+            <div class="slide-header">
+                <div class="logo-container">
+                    <img src="../images/safexpress.png" alt="Safexpress" class="logo">
+                    <span class="separator">×</span>
+                    <img src="../images/rhobots.png" alt="Rhobots" class="logo">
+                </div>
+            </div>
+
+            <div class="content">
+                <h1>AI-First Automation Framework</h1>
+
+                <div class="product-cards" id="product-cards">
+                    <div class="product-card" data-step="0">
+                        <div class="product-icon">✅</div>
+                        <div class="product-name">DataGuard</div>
+                        <div class="product-tagline">Validate</div>
+                        <div class="product-desc">
+                            <ul>
+                                <li>Validates inputs against configurable rules</li>
+                                <li>Ensures clean data before automation runs</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-step="1">
+                        <div class="product-icon">🤖</div>
+                        <div class="product-name">AutoPilot</div>
+                        <div class="product-tagline">Automate</div>
+                        <div class="product-desc">
+                            <ul>
+                                <li>AI generates & executes workflows in secure sandbox</li>
+                                <li>Adapts to dynamic field changes</li>
+                                <li>Can pause / adjust / override at any stage</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-step="2">
+                        <div class="product-icon">🔍</div>
+                        <div class="product-name">DeepTrace</div>
+                        <div class="product-tagline">Trace</div>
+                        <div class="product-desc">
+                            <ul>
+                                <li>Full visibility into every step</li>
+                                <li>Video, screenshots, logs, scripts</li>
+                                <li>Easy auditing & debugging</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="operator-card" id="operator-card">
+                    <div class="operator-icon">⚡</div>
+                    <div class="operator-title">Rhobots Operator</div>
+                    <div class="operator-subtitle">AI-Powered Automation Engine</div>
+                    <div class="operator-features">
+                        <div class="operator-feature">✅ Validate</div>
+                        <div class="operator-feature">🤖 Automate</div>
+                        <div class="operator-feature">🔍 Trace</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Demo -->
+        <div class="slide" data-slide="4">
+            <div class="bg-shapes">
+                <div class="shape diamond" style="top: 10%; left: 10%; animation-delay: 0.5s;"></div>
+                <div class="shape circle" style="bottom: 15%; right: 10%; animation-delay: 1.2s;"></div>
+                <div class="shape triangle" style="top: 50%; right: 5%; animation-delay: 1.8s;"></div>
+            </div>
+
+            <div class="slide-header">
+                <div class="logo-container">
+                    <img src="../images/safexpress.png" alt="Safexpress" class="logo">
+                    <span class="separator">×</span>
+                    <img src="../images/rhobots.png" alt="Rhobots" class="logo">
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="demo-message" data-step="0">
+                    Let's Dive Into a <span class="highlight">Live Demo</span> 🚀
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="slide-counter">
+        <span id="current-slide">1</span> / <span id="total-slides">5</span>
+    </div>
+
+    <div class="nav-controls">
+        <button class="nav-btn" id="prev-btn" onclick="previousSlide()">←</button>
+        <button class="nav-btn" id="next-btn" onclick="nextSlide()">→</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        let currentStep = -1;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        document.getElementById('total-slides').textContent = totalSlides;
+
+        // Define steps for each slide
+        const slideSteps = {
+            0: 1,  // Slide 0: 1 step (big question)
+            1: 4,  // Slide 1: 4 bullet items
+            2: 4,  // Slide 2: 4 bullet items
+            3: 4,  // Slide 3: 3 product cards + 1 operator card reveal
+            4: 1   // Slide 4: 1 demo message
+        };
+
+        function resetSlideContent(slideIndex) {
+            const slide = slides[slideIndex];
+
+            // Hide all elements with data-step
+            const steppedElements = slide.querySelectorAll('[data-step]');
+            steppedElements.forEach(el => {
+                el.classList.remove('show');
+            });
+
+            // Reset slide 3 special state
+            if (slideIndex === 3) {
+                const productCards = slide.querySelectorAll('.product-card');
+                const productCardsContainer = slide.querySelector('.product-cards');
+                const operatorCard = slide.querySelector('.operator-card');
+
+                productCards.forEach(card => {
+                    card.classList.remove('combining', 'combine-to-center');
+                });
+                productCardsContainer.classList.remove('hiding');
+                operatorCard.classList.remove('show');
+            }
+        }
+
+        function showSlideStep(slideIndex, step) {
+            const slide = slides[slideIndex];
+
+            // Special handling for slide 3 (product cards combining)
+            if (slideIndex === 3) {
+                const productCards = slide.querySelectorAll('.product-card');
+                const productCardsContainer = slide.querySelector('.product-cards');
+                const operatorCard = slide.querySelector('.operator-card');
+
+                if (step >= 0 && step <= 2) {
+                    // Show product cards one by one
+                    productCards[step].classList.add('show');
+                } else if (step === 3) {
+                    // Combine animation
+                    productCards.forEach(card => {
+                        card.classList.add('combining', 'combine-to-center');
+                    });
+
+                    // Hide the container and show operator card after animation
+                    setTimeout(() => {
+                        productCardsContainer.classList.add('hiding');
+                    }, 600);
+
+                    setTimeout(() => {
+                        operatorCard.classList.add('show');
+                    }, 1000);
+                }
+                return;
+            }
+
+            // Default handling for other slides
+            const element = slide.querySelector(`[data-step="${step}"]`);
+            if (element) {
+                element.classList.add('show');
+            }
+        }
+
+        function showSlide(n) {
+            // Remove active class from current slide
+            slides[currentSlide].classList.remove('active');
+
+            // Calculate new slide
+            currentSlide = (n + totalSlides) % totalSlides;
+
+            // Reset content and step counter
+            resetSlideContent(currentSlide);
+            currentStep = -1;
+
+            // Show new slide
+            slides[currentSlide].classList.add('active');
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+        }
+
+        function next() {
+            const maxSteps = slideSteps[currentSlide];
+
+            if (currentStep < maxSteps - 1) {
+                // Show next step in current slide
+                currentStep++;
+                showSlideStep(currentSlide, currentStep);
+            } else {
+                // Move to next slide
+                showSlide(currentSlide + 1);
+            }
+        }
+
+        function previous() {
+            if (currentStep > 0) {
+                // Go back one step in current slide
+                const slide = slides[currentSlide];
+                const element = slide.querySelector(`[data-step="${currentStep}"]`);
+                if (element) {
+                    element.classList.remove('show');
+                }
+
+                // Special handling for slide 3 going backwards
+                if (currentSlide === 3 && currentStep === 3) {
+                    const productCards = slide.querySelectorAll('.product-card');
+                    const productCardsContainer = slide.querySelector('.product-cards');
+                    const operatorCard = slide.querySelector('.operator-card');
+
+                    operatorCard.classList.remove('show');
+                    productCardsContainer.classList.remove('hiding');
+
+                    productCards.forEach(card => {
+                        card.classList.remove('combining', 'combine-to-center');
+                    });
+                }
+
+                currentStep--;
+            } else {
+                // Move to previous slide and show all its content
+                const prevSlideIndex = (currentSlide - 1 + totalSlides) % totalSlides;
+                showSlide(prevSlideIndex);
+
+                // Show all steps of the previous slide
+                const maxSteps = slideSteps[prevSlideIndex];
+                for (let i = 0; i < maxSteps; i++) {
+                    currentStep = i;
+                    showSlideStep(prevSlideIndex, i);
+                }
+            }
+        }
+
+        function nextSlide() {
+            next();
+        }
+
+        function previousSlide() {
+            previous();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                next();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                previous();
+            }
+        });
+
+        // Touch swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                next();
+            }
+            if (touchEndX > touchStartX + 50) {
+                previous();
+            }
+        }
+    </script>
+</body>
+</html>

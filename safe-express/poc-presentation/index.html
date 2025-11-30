@@ -29,7 +29,7 @@
             width: 100%;
             height: 100%;
             display: none;
-            padding: 20px;
+            padding: 120px 20px 20px 20px;
             animation: slideIn 0.6s ease-out;
             box-sizing: border-box;
         }
@@ -73,11 +73,17 @@
 
         /* Header with logos */
         .slide-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            animation: fadeInUp 0.6s ease-out;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
 
         .logo-container {
@@ -551,7 +557,11 @@
             }
 
             .slide {
-                padding: 30px 25px;
+                padding: 110px 25px 30px 25px;
+            }
+
+            .slide-header {
+                padding: 15px;
             }
 
             h1 {
@@ -592,11 +602,11 @@
             }
 
             .slide {
-                padding: 20px 12px;
+                padding: 100px 12px 20px 12px;
             }
 
             .slide-header {
-                margin-bottom: 15px;
+                padding: 12px;
             }
 
             .logo {
@@ -804,11 +814,11 @@
             }
 
             .slide {
-                padding: 15px 10px;
+                padding: 90px 10px 15px 10px;
             }
 
             .slide-header {
-                margin-bottom: 12px;
+                padding: 10px;
                 flex-direction: column;
                 gap: 8px;
             }
@@ -1000,6 +1010,15 @@
     </style>
 </head>
 <body>
+    <!-- Fixed Header -->
+    <div class="slide-header">
+        <div class="logo-container">
+            <img src="../../images/safexpress.png" alt="Safexpress" class="logo">
+            <span class="separator">×</span>
+            <img src="../../images/rhobots.png" alt="Rhobots" class="logo">
+        </div>
+    </div>
+
     <div class="presentation">
         <!-- Slide 0: Context & Objective -->
         <div class="slide active" data-slide="0">
@@ -1007,14 +1026,6 @@
                 <div class="shape circle" style="top: 10%; left: 5%;"></div>
                 <div class="shape diamond" style="top: 60%; right: 10%;"></div>
                 <div class="shape triangle" style="bottom: 10%; left: 15%;"></div>
-            </div>
-
-            <div class="slide-header">
-                <div class="logo-container">
-                    <img src="../../images/safexpress.png" alt="Safexpress" class="logo">
-                    <span class="separator">×</span>
-                    <img src="../../images/rhobots.png" alt="Rhobots" class="logo">
-                </div>
             </div>
 
             <div class="content">
@@ -1030,14 +1041,6 @@
             <div class="bg-shapes">
                 <div class="shape diamond" style="top: 15%; right: 5%; animation-delay: 1s;"></div>
                 <div class="shape circle" style="bottom: 20%; left: 10%; animation-delay: 2s;"></div>
-            </div>
-
-            <div class="slide-header">
-                <div class="logo-container">
-                    <img src="../../images/safexpress.png" alt="Safexpress" class="logo">
-                    <span class="separator">×</span>
-                    <img src="../../images/rhobots.png" alt="Rhobots" class="logo">
-                </div>
             </div>
 
             <div class="content">
@@ -1072,14 +1075,6 @@
                 <div class="shape diamond" style="bottom: 15%; left: 5%; animation-delay: 1.5s;"></div>
             </div>
 
-            <div class="slide-header">
-                <div class="logo-container">
-                    <img src="../../images/safexpress.png" alt="Safexpress" class="logo">
-                    <span class="separator">×</span>
-                    <img src="../../images/rhobots.png" alt="Rhobots" class="logo">
-                </div>
-            </div>
-
             <div class="content">
                 <h1>Why Traditional Automation Fails</h1>
                 <h2>Challenges with Legacy Automation</h2>
@@ -1111,14 +1106,6 @@
                 <div class="shape circle" style="top: 5%; right: 10%; animation-delay: 0.3s;"></div>
                 <div class="shape diamond" style="top: 50%; left: 5%; animation-delay: 1s;"></div>
                 <div class="shape triangle" style="bottom: 5%; right: 15%; animation-delay: 1.7s;"></div>
-            </div>
-
-            <div class="slide-header">
-                <div class="logo-container">
-                    <img src="../../images/safexpress.png" alt="Safexpress" class="logo">
-                    <span class="separator">×</span>
-                    <img src="../../images/rhobots.png" alt="Rhobots" class="logo">
-                </div>
             </div>
 
             <div class="content">
@@ -1183,14 +1170,6 @@
                 <div class="shape diamond" style="top: 10%; left: 10%; animation-delay: 0.5s;"></div>
                 <div class="shape circle" style="bottom: 15%; right: 10%; animation-delay: 1.2s;"></div>
                 <div class="shape triangle" style="top: 50%; right: 5%; animation-delay: 1.8s;"></div>
-            </div>
-
-            <div class="slide-header">
-                <div class="logo-container">
-                    <img src="../../images/safexpress.png" alt="Safexpress" class="logo">
-                    <span class="separator">×</span>
-                    <img src="../../images/rhobots.png" alt="Rhobots" class="logo">
-                </div>
             </div>
 
             <div class="content">

@@ -15,6 +15,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow: hidden;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-size: 16px;
         }
 
         .presentation {
@@ -28,8 +29,9 @@
             width: 100%;
             height: 100%;
             display: none;
-            padding: 60px;
+            padding: 20px;
             animation: slideIn 0.6s ease-out;
+            box-sizing: border-box;
         }
 
         .slide.active {
@@ -74,7 +76,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
             animation: fadeInUp 0.6s ease-out;
         }
 
@@ -90,7 +92,7 @@
         }
 
         .separator {
-            font-size: 40px;
+            font-size: 24px;
             color: #ccc;
             font-weight: 100;
         }
@@ -144,10 +146,13 @@
             text-align: center;
             position: relative;
             z-index: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            width: 100%;
         }
 
         h1 {
-            font-size: 3.5em;
+            font-size: 2.5em;
             color: #3d3d3d;
             margin-bottom: 30px;
             font-weight: 700;
@@ -155,7 +160,7 @@
         }
 
         h2 {
-            font-size: 2em;
+            font-size: 1.6em;
             color: #008751;
             margin-bottom: 20px;
             font-weight: 600;
@@ -170,7 +175,7 @@
         }
 
         .big-question {
-            font-size: 2.2em;
+            font-size: 1.6em;
             color: #3d3d3d;
             font-weight: 600;
             max-width: 900px;
@@ -193,14 +198,15 @@
         .bullet-list {
             text-align: left;
             max-width: 800px;
+            width: 100%;
             animation: fadeInUp 1.2s ease-out;
         }
 
         .bullet-item {
             display: none;
             align-items: flex-start;
-            margin-bottom: 25px;
-            padding: 20px;
+            margin-bottom: 16px;
+            padding: 16px;
             background: rgba(255, 255, 255, 0.9);
             border-radius: 15px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
@@ -394,7 +400,7 @@
 
         /* Demo slide */
         .demo-message {
-            font-size: 3.5em;
+            font-size: 2.2em;
             color: #3d3d3d;
             font-weight: 700;
             text-align: center;
@@ -537,6 +543,460 @@
             color: #1E9DD7;
             font-weight: 700;
         }
+
+        /* Responsive Design */
+        @media screen and (max-width: 1024px) {
+            body {
+                font-size: 14px;
+            }
+
+            .slide {
+                padding: 30px 25px;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            h2 {
+                font-size: 1.4em;
+            }
+
+            .subtitle {
+                font-size: 1.2em;
+            }
+
+            .big-question {
+                font-size: 1.2em;
+                padding: 25px;
+            }
+
+            .product-card {
+                min-width: 250px;
+                padding: 25px;
+            }
+
+            .demo-message {
+                font-size: 2.5em;
+                padding: 40px;
+            }
+
+            .logo {
+                height: 40px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            body {
+                font-size: 13px;
+            }
+
+            .slide {
+                padding: 20px 12px;
+            }
+
+            .slide-header {
+                margin-bottom: 15px;
+            }
+
+            .logo {
+                height: 35px;
+            }
+
+            .logo-container {
+                gap: 10px;
+            }
+
+            .separator {
+                font-size: 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+                margin-bottom: 12px;
+            }
+
+            h2 {
+                font-size: 1.25rem;
+                margin-bottom: 10px;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+                margin-bottom: 15px;
+            }
+
+            .big-question {
+                font-size: 1.1rem;
+                padding: 15px;
+                max-width: 100%;
+                line-height: 1.4;
+            }
+
+            .bullet-list {
+                max-width: 100%;
+                width: 100%;
+            }
+
+            .bullet-item {
+                margin-bottom: 10px;
+                padding: 12px;
+                flex-direction: row;
+                text-align: left;
+                width: 100%;
+                box-sizing: border-box;
+                align-items: center;
+            }
+
+            .icon {
+                font-size: 1.5rem;
+                margin-right: 10px;
+                margin-bottom: 0;
+                flex-shrink: 0;
+            }
+
+            .bullet-text {
+                font-size: 0.9rem;
+                width: 100%;
+                word-wrap: break-word;
+                line-height: 1.4;
+            }
+
+            .product-cards {
+                gap: 12px;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .product-card {
+                min-width: 100%;
+                max-width: 100%;
+                padding: 15px;
+            }
+
+            .product-icon {
+                font-size: 2rem;
+                margin-bottom: 10px;
+            }
+
+            .product-name {
+                font-size: 1.3rem;
+                margin-bottom: 5px;
+            }
+
+            .product-tagline {
+                font-size: 0.9rem;
+                margin-bottom: 10px;
+            }
+
+            .product-desc {
+                font-size: 0.85rem;
+            }
+
+            .product-desc ul {
+                padding-left: 20px;
+            }
+
+            .product-desc li {
+                margin-bottom: 5px;
+            }
+
+            .operator-card {
+                padding: 20px;
+                max-width: 100%;
+            }
+
+            .operator-icon {
+                font-size: 2.5rem;
+                margin-bottom: 10px;
+            }
+
+            .operator-title {
+                font-size: 1.6rem;
+                margin-bottom: 10px;
+            }
+
+            .operator-subtitle {
+                font-size: 0.95rem;
+                margin-bottom: 15px;
+            }
+
+            .operator-features {
+                gap: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .operator-feature {
+                padding: 8px 15px;
+                font-size: 0.85rem;
+            }
+
+            .demo-message {
+                font-size: 1.4rem;
+                padding: 20px 15px;
+            }
+
+            .demo-flow {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .flow-arrow {
+                font-size: 1.5rem;
+                transform: rotate(90deg);
+            }
+
+            .flow-step {
+                padding: 15px;
+                width: 100%;
+            }
+
+            .step-number {
+                font-size: 1.8rem;
+            }
+
+            .step-name {
+                font-size: 1rem;
+            }
+
+            .step-desc {
+                font-size: 0.85rem;
+            }
+
+            .nav-controls {
+                bottom: 12px;
+                right: 12px;
+                gap: 8px;
+            }
+
+            .nav-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+
+            .slide-counter {
+                bottom: 12px;
+                left: 12px;
+                font-size: 0.85rem;
+                padding: 8px 12px;
+            }
+
+            .footer-line {
+                font-size: 0.95rem;
+                margin-top: 20px;
+            }
+
+            /* Reduce background shapes on smaller screens */
+            .bg-shapes {
+                opacity: 0.04;
+            }
+
+            .circle, .diamond, .triangle {
+                transform: scale(0.6);
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            body {
+                font-size: 12px;
+            }
+
+            .slide {
+                padding: 15px 10px;
+            }
+
+            .slide-header {
+                margin-bottom: 12px;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .logo {
+                height: 28px;
+            }
+
+            .logo-container {
+                gap: 8px;
+            }
+
+            .separator {
+                font-size: 1.2rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+                margin-bottom: 10px;
+            }
+
+            h2 {
+                font-size: 1.1rem;
+                margin-bottom: 8px;
+            }
+
+            .subtitle {
+                font-size: 0.9rem;
+                margin-bottom: 12px;
+            }
+
+            .big-question {
+                font-size: 1rem;
+                padding: 12px;
+                line-height: 1.4;
+            }
+
+            .bullet-list {
+                max-width: 100%;
+                width: 100%;
+            }
+
+            .bullet-item {
+                margin-bottom: 8px;
+                padding: 10px;
+                width: 100%;
+                box-sizing: border-box;
+                flex-direction: row;
+                align-items: flex-start;
+            }
+
+            .icon {
+                font-size: 1.3rem;
+                margin-right: 8px;
+                margin-bottom: 0;
+            }
+
+            .bullet-text {
+                font-size: 0.85rem;
+                line-height: 1.3;
+                width: 100%;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+
+            .product-card {
+                padding: 12px;
+                min-width: 100%;
+            }
+
+            .product-icon {
+                font-size: 1.8rem;
+                margin-bottom: 8px;
+            }
+
+            .product-name {
+                font-size: 1.1rem;
+                margin-bottom: 5px;
+            }
+
+            .product-tagline {
+                font-size: 0.85rem;
+                margin-bottom: 8px;
+            }
+
+            .product-desc {
+                font-size: 0.8rem;
+                line-height: 1.3;
+            }
+
+            .product-desc ul {
+                padding-left: 18px;
+            }
+
+            .product-desc li {
+                margin-bottom: 4px;
+            }
+
+            .operator-card {
+                padding: 15px;
+            }
+
+            .operator-icon {
+                font-size: 2rem;
+                margin-bottom: 10px;
+            }
+
+            .operator-title {
+                font-size: 1.3rem;
+                margin-bottom: 8px;
+            }
+
+            .operator-subtitle {
+                font-size: 0.85rem;
+                margin-bottom: 12px;
+            }
+
+            .operator-features {
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            .operator-feature {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+
+            .demo-message {
+                font-size: 1.15rem;
+                padding: 15px 12px;
+                line-height: 1.3;
+            }
+
+            .flow-step {
+                padding: 10px;
+            }
+
+            .step-number {
+                font-size: 1.5rem;
+            }
+
+            .step-name {
+                font-size: 0.9rem;
+                margin-bottom: 5px;
+            }
+
+            .step-desc {
+                font-size: 0.75rem;
+                line-height: 1.3;
+            }
+
+            .nav-controls {
+                bottom: 10px;
+                right: 10px;
+            }
+
+            .nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .slide-counter {
+                bottom: 10px;
+                left: 10px;
+                font-size: 0.75rem;
+                padding: 6px 10px;
+            }
+
+            .footer-line {
+                font-size: 0.85rem;
+                margin-top: 15px;
+            }
+
+            /* Further reduce background shapes */
+            .bg-shapes {
+                opacity: 0.02;
+            }
+
+            .circle, .diamond, .triangle {
+                transform: scale(0.4);
+            }
+
+            .content {
+                justify-content: flex-start;
+                padding-top: 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -551,9 +1011,9 @@
 
             <div class="slide-header">
                 <div class="logo-container">
-                    <img src="../images/safexpress.png" alt="Safexpress" class="logo">
+                    <img src="../../images/safexpress.png" alt="Safexpress" class="logo">
                     <span class="separator">×</span>
-                    <img src="../images/rhobots.png" alt="Rhobots" class="logo">
+                    <img src="../../images/rhobots.png" alt="Rhobots" class="logo">
                 </div>
             </div>
 
@@ -574,9 +1034,9 @@
 
             <div class="slide-header">
                 <div class="logo-container">
-                    <img src="../images/safexpress.png" alt="Safexpress" class="logo">
+                    <img src="../../images/safexpress.png" alt="Safexpress" class="logo">
                     <span class="separator">×</span>
-                    <img src="../images/rhobots.png" alt="Rhobots" class="logo">
+                    <img src="../../images/rhobots.png" alt="Rhobots" class="logo">
                 </div>
             </div>
 
@@ -614,9 +1074,9 @@
 
             <div class="slide-header">
                 <div class="logo-container">
-                    <img src="../images/safexpress.png" alt="Safexpress" class="logo">
+                    <img src="../../images/safexpress.png" alt="Safexpress" class="logo">
                     <span class="separator">×</span>
-                    <img src="../images/rhobots.png" alt="Rhobots" class="logo">
+                    <img src="../../images/rhobots.png" alt="Rhobots" class="logo">
                 </div>
             </div>
 
@@ -655,9 +1115,9 @@
 
             <div class="slide-header">
                 <div class="logo-container">
-                    <img src="../images/safexpress.png" alt="Safexpress" class="logo">
+                    <img src="../../images/safexpress.png" alt="Safexpress" class="logo">
                     <span class="separator">×</span>
-                    <img src="../images/rhobots.png" alt="Rhobots" class="logo">
+                    <img src="../../images/rhobots.png" alt="Rhobots" class="logo">
                 </div>
             </div>
 
@@ -727,9 +1187,9 @@
 
             <div class="slide-header">
                 <div class="logo-container">
-                    <img src="../images/safexpress.png" alt="Safexpress" class="logo">
+                    <img src="../../images/safexpress.png" alt="Safexpress" class="logo">
                     <span class="separator">×</span>
-                    <img src="../images/rhobots.png" alt="Rhobots" class="logo">
+                    <img src="../../images/rhobots.png" alt="Rhobots" class="logo">
                 </div>
             </div>
 

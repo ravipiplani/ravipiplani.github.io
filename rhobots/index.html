@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rhobots.AI — Enterprise AI, Engineered for Reality</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #07090f;
+    --bg-2: #0b0f1a;
+    --surface: #11172a;
+    --surface-2: #161d33;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.16);
+    --text: #ffffff;
+    --text-2: rgba(255,255,255,0.72);
+    --text-3: rgba(255,255,255,0.48);
+    --accent: #00E5FF;
+    --accent-2: #A78BFA;
+    --accent-3: #34d399;
+    --warn: #fbbf24;
+    --danger: #f87171;
+    --glow: 0 0 32px rgba(0, 229, 255, 0.25);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(--text); font-family: 'Inter', -apple-system, sans-serif; }
+
+  body {
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,229,255,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 100% 100%, rgba(167,139,250,0.07) 0%, transparent 60%),
+      var(--bg);
+  }
+
+  .deck { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
+
+  .slide {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    padding: 56px 80px 72px;
+    opacity: 0; pointer-events: none;
+    transform: translateY(20px) scale(0.99);
+    transition: opacity 480ms cubic-bezier(.2,.7,.2,1), transform 480ms cubic-bezier(.2,.7,.2,1);
+  }
+  .slide.active { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); }
+
+  /* === Header chrome === */
+  .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }
+  .brand { display: flex; align-items: center; gap: 12px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+  .brand-mark { width: 28px; height: 28px; border-radius: 8px; background: conic-gradient(from 180deg, var(--accent), var(--accent-2), var(--accent)); box-shadow: var(--glow); position: relative; }
+  .brand-mark::after { content: ''; position: absolute; inset: 6px; border-radius: 4px; background: var(--bg); }
+  .brand-name { font-size: 16px; }
+  .brand-name span { color: var(--accent); }
+  .slide-tag { font-family: 'Space Grotesk', sans-serif; font-size: 12px; color: var(--text-3); letter-spacing: 0.18em; text-transform: uppercase; }
+
+  /* === Typography === */
+  .eyebrow { font-family: 'Space Grotesk', sans-serif; font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+  h1.title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 72px; line-height: 1.02; letter-spacing: -0.03em; }
+  h1.title .grad { background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  h2.slide-h { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 44px; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 14px; }
+  h3.section-h { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 20px; letter-spacing: -0.01em; }
+  p.lede { font-size: 19px; line-height: 1.55; color: var(--text-2); max-width: 880px; }
+  p.body { font-size: 16px; line-height: 1.6; color: var(--text-2); }
+
+  /* === Cover === */
+  .cover { justify-content: center; }
+  .cover .eyebrow { margin-bottom: 28px; }
+  .cover h1.title { font-size: 96px; margin-bottom: 28px; }
+  .cover .tagline { font-size: 22px; color: var(--text-2); max-width: 720px; }
+  .cover-footer { position: absolute; bottom: 56px; left: 80px; right: 80px; display: flex; justify-content: space-between; align-items: end; color: var(--text-3); font-size: 13px; }
+  .cover-orb { position: absolute; right: -120px; top: 50%; transform: translateY(-50%); width: 640px; height: 640px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, rgba(0,229,255,0.25), rgba(167,139,250,0.1) 40%, transparent 70%); filter: blur(40px); pointer-events: none; }
+
+  /* === Cards / grids === */
+  .grid { display: grid; gap: 20px; }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .grid-2 { grid-template-columns: 1.1fr 0.9fr; }
+
+  .card {
+    background: linear-gradient(180deg, var(--surface), var(--surface-2));
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 200ms, transform 200ms;
+  }
+  .card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0; transition: opacity 300ms;
+  }
+  .card:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+  .card:hover::before { opacity: 0.6; }
+  .card .ico { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: rgba(0,229,255,0.08); border: 1px solid rgba(0,229,255,0.18); margin-bottom: 16px; font-size: 20px; }
+  .card h4 { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600; margin-bottom: 10px; letter-spacing: -0.01em; }
+  .card p { font-size: 14.5px; color: var(--text-2); line-height: 1.55; }
+
+  /* Problem cards */
+  .problem .ico { background: rgba(248,113,113,0.08); border-color: rgba(248,113,113,0.25); color: var(--danger); }
+  .problem .label { color: var(--danger); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 8px; font-weight: 600; }
+
+  /* === LaaP slide === */
+  .laap-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; flex: 1; }
+  .laap-visual { position: relative; height: 420px; }
+  .role-orbit { position: absolute; inset: 0; }
+  .role-bubble { position: absolute; padding: 10px 18px; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 999px; font-size: 13px; font-weight: 500; color: var(--text-2); white-space: nowrap; box-shadow: 0 4px 18px rgba(0,0,0,0.4); }
+  .role-bubble.accent { border-color: rgba(0,229,255,0.45); color: var(--text); box-shadow: 0 0 24px rgba(0,229,255,0.18); }
+  .laap-core {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    width: 220px; height: 220px; border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--accent-2), var(--accent));
+    box-shadow: 0 0 80px rgba(0,229,255,0.35);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 32px; color: var(--bg); letter-spacing: -0.02em;
+  }
+
+  /* Bullet list */
+  ul.checklist { list-style: none; margin-top: 24px; }
+  ul.checklist li { display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px dashed var(--border); color: var(--text); font-size: 16px; }
+  ul.checklist li:last-child { border-bottom: none; }
+  ul.checklist li::before { content: '✓'; color: var(--accent); font-weight: 700; }
+  ul.checklist li b { color: var(--text); font-weight: 600; }
+
+  /* === Product slide === */
+  .product { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; flex: 1; align-items: center; }
+  .product-meta .eyebrow { color: var(--accent-2); }
+  .product-meta h2 { font-size: 56px; margin-bottom: 18px; }
+  .product-meta .pitch { font-size: 20px; color: var(--text-2); line-height: 1.5; margin-bottom: 28px; max-width: 540px; }
+  .feature-row { display: flex; gap: 14px; margin-bottom: 14px; align-items: flex-start; }
+  .feature-row .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-top: 9px; flex-shrink: 0; box-shadow: 0 0 8px var(--accent); }
+  .feature-row .ftxt { color: var(--text-2); font-size: 16px; line-height: 1.5; }
+  .feature-row .ftxt b { color: var(--text); font-weight: 600; }
+
+  .demo-card {
+    background: linear-gradient(135deg, var(--surface), var(--surface-2));
+    border: 1px solid var(--border-strong);
+    border-radius: 20px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .demo-frame {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    border-radius: 12px;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 50% 50%, rgba(0,229,255,0.18), transparent 60%),
+      linear-gradient(135deg, #0e1426, #1a223d);
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--border-strong);
+  }
+  .demo-frame::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.25) 100%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 3px);
+    pointer-events: none;
+  }
+  .demo-frame .play {
+    width: 88px; height: 88px; border-radius: 50%;
+    background: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 60px rgba(0,229,255,0.6), 0 12px 30px rgba(0,0,0,0.5);
+    position: relative; z-index: 2;
+    transition: transform 200ms;
+  }
+  .demo-frame .play::after {
+    content: ''; width: 0; height: 0;
+    border-style: solid;
+    border-width: 14px 0 14px 22px;
+    border-color: transparent transparent transparent var(--bg);
+    margin-left: 6px;
+  }
+  .demo-frame video,
+  .demo-frame iframe {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    background: #000;
+    border: 0;
+    z-index: 3;
+  }
+  .demo-card a.demo-btn { display: inline-flex; align-items: center; gap: 10px; margin-top: 16px; padding: 12px 20px; background: var(--accent); color: var(--bg); text-decoration: none; border-radius: 10px; font-weight: 600; font-size: 14px; transition: background 200ms; }
+  .demo-card a.demo-btn:hover { background: #4ef0ff; }
+  .demo-card a.demo-btn::after { content: '→'; font-size: 16px; }
+  .demo-label { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-3); margin-bottom: 14px; font-family: 'Space Grotesk', sans-serif; }
+
+  /* === Outcomes / metric grid === */
+  .metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 28px; }
+  .metric {
+    background: linear-gradient(180deg, var(--surface), var(--surface-2));
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px 24px;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+  }
+  .metric::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  }
+  .metric .num { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 64px; line-height: 1; letter-spacing: -0.03em; background: linear-gradient(135deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .metric .lbl { margin-top: 12px; font-size: 14px; color: var(--text-2); line-height: 1.4; font-weight: 500; }
+
+  .proof-strip { margin-top: 28px; background: linear-gradient(135deg, rgba(0,229,255,0.06), rgba(167,139,250,0.06)); border: 1px solid var(--border-strong); border-radius: 14px; padding: 24px 28px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; }
+  .proof-strip .proof-title { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 17px; color: var(--text); margin-bottom: 6px; }
+  .proof-strip .proof-body { color: var(--text-2); font-size: 14.5px; line-height: 1.55; }
+  .proof-strip .proof-stat { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 36px; color: var(--accent); letter-spacing: -0.02em; }
+  .proof-strip .proof-stat small { display: block; font-size: 11px; color: var(--text-3); font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; margin-top: 4px; }
+
+  /* === Suite slide === */
+  .suite-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; flex: 1; margin-top: 8px; }
+  .suite-card {
+    background: linear-gradient(160deg, var(--surface), var(--surface-2));
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .suite-card::after { content: ''; position: absolute; right: -40px; top: -40px; width: 140px; height: 140px; border-radius: 50%; background: radial-gradient(circle, rgba(0,229,255,0.12), transparent 70%); }
+  .suite-card .badge { font-family: 'Space Grotesk', sans-serif; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  .suite-card h4 { font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; letter-spacing: -0.02em; }
+  .suite-card .sub { color: var(--text-2); font-size: 14.5px; line-height: 1.5; }
+  .suite-card.foundation { border-color: rgba(0,229,255,0.3); background: linear-gradient(160deg, rgba(0,229,255,0.06), var(--surface-2)); }
+  .suite-card.foundation::after { background: radial-gradient(circle, rgba(0,229,255,0.2), transparent 70%); }
+
+  /* === Closing slide === */
+  .closing { justify-content: center; align-items: flex-start; }
+  .closing h1.title { font-size: 88px; margin-bottom: 24px; }
+  .closing .lede { font-size: 22px; max-width: 760px; margin-bottom: 48px; }
+  .cta-row { display: flex; gap: 18px; flex-wrap: wrap; }
+  .cta {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 18px 28px;
+    border-radius: 14px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600; font-size: 16px;
+    text-decoration: none;
+    transition: transform 200ms, box-shadow 200ms;
+  }
+  .cta.primary { background: var(--accent); color: var(--bg); box-shadow: var(--glow); }
+  .cta.primary:hover { transform: translateY(-2px); box-shadow: 0 0 48px rgba(0,229,255,0.5); }
+  .cta.ghost { background: transparent; color: var(--text); border: 1px solid var(--border-strong); }
+  .cta.ghost:hover { border-color: var(--accent); }
+
+  .contact-grid { margin-top: 64px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 880px; }
+  .contact-grid .item .k { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-3); font-family: 'Space Grotesk', sans-serif; font-weight: 600; margin-bottom: 8px; }
+  .contact-grid .item .v { font-size: 18px; color: var(--text); font-weight: 500; }
+  .contact-grid .item .v a { color: var(--accent); text-decoration: none; }
+
+  /* === Navigation chrome === */
+  .nav {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; gap: 14px;
+    background: rgba(11,15,26,0.85); backdrop-filter: blur(10px);
+    border: 1px solid var(--border); border-radius: 999px;
+    padding: 8px 16px;
+    z-index: 100;
+  }
+  .nav button { background: none; border: none; color: var(--text-2); width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 200ms, color 200ms; }
+  .nav button:hover { background: var(--surface); color: var(--text); }
+  .nav button:disabled { opacity: 0.3; cursor: not-allowed; }
+  .nav .counter { font-family: 'Space Grotesk', sans-serif; font-size: 13px; color: var(--text-2); font-weight: 500; padding: 0 6px; }
+  .nav .counter b { color: var(--text); }
+
+  .progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; background: rgba(255,255,255,0.05); z-index: 99; }
+  .progress .bar { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); width: 0%; transition: width 400ms cubic-bezier(.2,.7,.2,1); box-shadow: var(--glow); }
+
+  .help-hint { position: fixed; bottom: 20px; right: 20px; font-size: 11px; color: var(--text-3); font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* === Vs Table === */
+  .vs-table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 28px; }
+  .vs-table th, .vs-table td { padding: 16px 20px; text-align: left; border-bottom: 1px solid var(--border); font-size: 15px; }
+  .vs-table th { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); }
+  .vs-table th.us { color: var(--accent); }
+  .vs-table th.them { color: var(--text-2); }
+  .vs-table td.metric-name { color: var(--text-2); font-weight: 500; }
+  .vs-table td.us-val { color: var(--text); font-weight: 600; }
+  .vs-table td.them-val { color: var(--text-2); }
+  .vs-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* === Small screens warning === */
+  @media (max-width: 900px) {
+    .slide { padding: 28px; }
+    h1.title { font-size: 48px !important; }
+    .cover h1.title { font-size: 56px; }
+    h2.slide-h { font-size: 32px; }
+    .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    .laap-hero, .product, .grid-2 { grid-template-columns: 1fr; gap: 28px; }
+    .metric-grid, .suite-grid { grid-template-columns: 1fr 1fr; }
+    .metric .num { font-size: 44px; }
+  }
+
+  /* Print */
+  @media print {
+    html, body { overflow: visible; height: auto; }
+    .nav, .progress, .help-hint { display: none; }
+    .slide { position: relative; inset: auto; opacity: 1; pointer-events: auto; transform: none; page-break-after: always; min-height: 100vh; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress"><div class="bar" id="progressBar"></div></div>
+
+<div class="deck" id="deck">
+
+  <!-- SLIDE 1: COVER -->
+  <section class="slide cover active">
+    <div class="cover-orb"></div>
+    <div class="top-bar">
+      <div class="brand">
+        <div class="brand-mark"></div>
+        <div class="brand-name">RHOBOTS<span>.AI</span></div>
+      </div>
+      <div class="slide-tag">01 / 10 · Cover</div>
+    </div>
+    <div style="margin-top: auto; margin-bottom: auto; position: relative; z-index: 1;">
+      <div class="eyebrow">Enterprise AI Platform</div>
+      <h1 class="title">Enterprise AI,<br/><span class="grad">Engineered for Reality.</span></h1>
+      <p class="tagline" style="margin-top: 28px;">Production-grade cognitive automation for serious enterprises. Sovereign by design. Measurable by default.</p>
+    </div>
+    <div class="cover-footer">
+      <div>rhobots.ai · An enterprise AI platform</div>
+      <div>2026</div>
+    </div>
+  </section>
+
+  <!-- SLIDE 2: THE ENTERPRISE AI GAP -->
+  <section class="slide">
+    <div class="top-bar">
+      <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
+      <div class="slide-tag">02 / 10 · The Problem</div>
+    </div>
+    <div class="eyebrow">The Enterprise AI Gap</div>
+    <h2 class="slide-h">Generic LLMs are a B2C miracle.<br/>A B2B liability.</h2>
+    <p class="lede">ChatGPT-class models are a trillion-dollar consumer breakthrough. For mission-critical enterprise work, three problems break the contract.</p>
+
+    <div class="grid grid-3 problem" style="margin-top: 36px; flex: 1; align-content: start;">
+      <div class="card">
+        <div class="ico">⚠</div>
+        <div class="label">Hallucinations</div>
+        <h4>Confidently wrong outputs</h4>
+        <p>The single biggest deterrent to AI in mission-critical workflows. Generalist models guess; enterprise processes can't afford guesses.</p>
+      </div>
+      <div class="card">
+        <div class="ico">$</div>
+        <div class="label">Cost</div>
+        <h4>10× larger, 10× marked up</h4>
+        <p>One-size-fits-all LLMs run at roughly 100× the cost a fit-for-purpose model would charge for the same enterprise task.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🔒</div>
+        <div class="label">Data Exposure</div>
+        <h4>Your IP, their training pipe</h4>
+        <p>Sending proprietary data into hosted, multi-tenant LLMs is a non-starter for any organization that takes its data seriously.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 3: LAAP -->
+  <section class="slide">
+    <div class="top-bar">
+      <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
+      <div class="slide-tag">03 / 10 · Our Philosophy</div>
+    </div>
+    <div class="laap-hero">
+      <div>
+        <div class="eyebrow">Our Core Approach</div>
+        <h2 class="slide-h">LaaP.<br/><span style="background: linear-gradient(135deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">LLM as a Person.</span></h2>
+        <p class="lede">Train each model on exactly what one human role does — and nothing else. The result: surgical accuracy, a fraction of the cost, and a clear path to step-by-step replacement of repetitive manpower.</p>
+        <ul class="checklist">
+          <li><span><b>Purpose-built per role</b> — not a generalist trying to be everything to everyone.</span></li>
+          <li><span><b>Small, agentic LMs</b> — 0.5–3B parameters that you own, not 500B you rent.</span></li>
+          <li><span><b>Self-hosted</b> — in your data center, your private cloud, your jurisdiction.</span></li>
+        </ul>
+      </div>
+      <div class="laap-visual">
+        <div class="role-orbit">
+          <div class="role-bubble accent" style="top: 8%; left: 12%;">Underwriter</div>
+          <div class="role-bubble" style="top: 14%; right: 8%;">Analyst</div>
+          <div class="role-bubble accent" style="top: 44%; left: 0%;">Support Agent</div>
+          <div class="role-bubble" style="top: 48%; right: -2%;">Reviewer</div>
+          <div class="role-bubble accent" style="bottom: 18%; left: 14%;">QA Engineer</div>
+          <div class="role-bubble" style="bottom: 8%; right: 14%;">Ops Manager</div>
+          <div class="role-bubble" style="bottom: 26%; right: -4%;">Auditor</div>
+          <div class="laap-core">LaaP</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 4: PLATFORM + 4 PRODUCTS -->
+  <section class="slide">
+    <div class="top-bar">
+      <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
+      <div class="slide-tag">04 / 10 · The Suite</div>
+    </div>
+    <div class="eyebrow">One Platform · Four Products</div>
+    <h2 class="slide-h">A complete enterprise AI stack —<br/>not a feature, not a chatbot.</h2>
+    <p class="lede" style="max-width: 760px;">Rhobots Studio is the foundation. Three production-grade products sit on top, each targeting a high-value enterprise workflow.</p>
+
+    <div class="suite-grid">
+      <div class="suite-card foundation">
+        <div class="badge">Foundation Platform</div>
+        <h4>Rhobots Studio</h4>
+        <p class="sub">Single pane of glass for configuring AI, fine-tuning models, hosting LLMs, and enforcing governance across the org. Runs in your data center or private cloud.</p>
+      </div>
+      <div class="suite-card">
+        <div class="badge">Product · Workflow Automation</div>
+        <h4>Rhobots Operator</h4>
+        <p class="sub">Put your most time-consuming business processes on autopilot. Discovers inefficiencies, automates repetitive tasks, scales operations — without ripping out existing systems.</p>
+      </div>
+      <div class="suite-card">
+        <div class="badge">Product · Document AI</div>
+        <h4>Rhobots Extractor</h4>
+        <p class="sub">Reads your documents, emails, and scanned files automatically — and turns them into clean, structured data ready for your business systems.</p>
+      </div>
+      <div class="suite-card">
+        <div class="badge">Product · Agentic Engineering</div>
+        <h4>Rhobots CoPilot</h4>
+        <p class="sub">From GitHub Issue to production code — autonomously. A multi-agent pipeline of reviewers, developers, QA, and security. Human-in-the-loop when it matters.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 5: STUDIO -->
+  <section class="slide">
+    <div class="top-bar">
+      <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
+      <div class="slide-tag">05 / 10 · Studio</div>
+    </div>
+    <div class="product">
+      <div class="product-meta">
+        <div class="eyebrow">Foundation Platform</div>
+        <h2 class="slide-h">Rhobots Studio</h2>
+        <p class="pitch">Your single pane of glass for configuring AI, tracking performance, and enforcing governance across the entire organization.</p>
+        <div class="feature-row"><div class="dot"></div><div class="ftxt"><b>Fine-tune & host LLMs</b> — purpose-built models for each role, with zero-code workflows.</div></div>
+        <div class="feature-row"><div class="dot"></div><div class="ftxt"><b>Runs in your environment</b> — data center or private cloud. Your infra, your control, your jurisdiction.</div></div>
+        <div class="feature-row"><div class="dot"></div><div class="ftxt"><b>Train on proprietary data</b> — your knowledge stays yours; never leaves your perimeter.</div></div>
+        <div class="feature-row"><div class="dot"></div><div class="ftxt"><b>Built-in governance</b> — performance tracking, evaluation, version control, audit trails.</div></div>
+      </div>
+      <div class="demo-card">
+        <div class="demo-label">Live Demo · Rhobots Studio</div>
+        <div class="demo-frame">
+          <iframe src="https://www.youtube-nocookie.com/embed/-oODQSd9rLk?rel=0&modestbranding=1" title="Rhobots Studio Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <a class="demo-btn" href="https://www.rhobots.ai" target="_blank" rel="noopener">Learn more about Studio</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 6: OPERATOR -->
+  <section class="slide">
+    <div class="top-bar">
+      <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
+      <div class="slide-tag">06 / 10 · Operator</div>
+    </div>
+    <div class="product">
+      <div class="product-meta">
+        <div class="eyebrow">Workflow Automation</div>
+        <h2 class="slide-h">Rhobots Operator</h2>
+        <p class="pitch">Automate your most complex workflows. Put your most time-consuming business processes on autopilot.</p>
+        <div class="feature-row"><div class="dot"></div><div class="ftxt"><b>Discovers inefficiencies</b> — Operator observes how work actually flows, then surfaces where automation will pay off.</div></div>
+        <div class="feature-row"><div class="dot"></div><div class="ftxt"><b>Automates repetitive tasks</b> — multi-step processes, decisions, and exceptions handled end-to-end.</div></div>
+        <div class="feature-row"><div class="dot"></div><div class="ftxt"><b>Scales operations</b> — handle 10× volume without 10× headcount.</div></div>
+        <div class="feature-row"><div class="dot"></div><div class="ftxt"><b>No system overhaul</b> — works on top of the tools your teams already use.</div></div>
+      </div>
+      <div class="demo-card">
+        <div class="demo-label">Live Demo · Rhobots Operator</div>
+        <div class="demo-frame"><div class="play"></div></div>
+        <a class="demo-btn" href="https://www.rhobots.ai/products/operator" target="_blank" rel="noopener">Watch Operator Demo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 7: EXTRACTOR -->
+  <section class="slide">
+    <div class="top-bar">
+      <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
+      <div class="slide-tag">07 / 10 · Extractor</div>
+    </div>
+    <div class="product">
+      <div class="product-meta">
+        <div class="eyebrow">Document AI</div>
+        <h2 class="slide-h">Rhobots Extractor</h2>
+        <p class="pitch">Extract. Structure. Scale. Stop losing hours to manual data entry — let AI do the reading.</p>
+        <div class="feature-row"><div class="dot"></div><div class="ftxt"><b>Reads any document</b> — invoices, contracts, statements, emails, scanned files, handwritten notes.</div></div>
+        <div class="feature-row"><div class="dot"></div><div class="ftxt"><b>Clean, structured output</b> — drops directly into ERPs, CRMs, data warehouses, or downstream systems.</div></div>
+        <div class="feature-row"><div class="dot"></div><div class="ftxt"><b>Trained on your formats</b> — accuracy where it matters most: <b>91%</b> on invoice extraction (vs. 83% for GPT-4o, at 1/10 the cost).</div></div>
+        <div class="feature-row"><div class="dot"></div><div class="ftxt"><b>Data stays internal</b> — extraction happens inside your perimeter. Nothing leaks out.</div></div>
+      </div>
+      <div class="demo-card">
+        <div class="demo-label">Live Demo · Rhobots Extractor</div>
+        <div class="demo-frame">
+          <iframe src="https://www.youtube-nocookie.com/embed/Xh4PTe58sqM?rel=0&modestbranding=1" title="Rhobots Extractor Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <a class="demo-btn" href="https://www.rhobots.ai/products/extract" target="_blank" rel="noopener">Learn more about Extractor</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 8: COPILOT -->
+  <section class="slide">
+    <div class="top-bar">
+      <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
+      <div class="slide-tag">08 / 10 · CoPilot</div>
+    </div>
+    <div class="product">
+      <div class="product-meta">
+        <div class="eyebrow">Agentic Engineering</div>
+        <h2 class="slide-h">Rhobots CoPilot</h2>
+        <p class="pitch">From ticket to production code — autonomously. A fully orchestrated multi-agent pipeline.</p>
+        <div class="feature-row"><div class="dot"></div><div class="ftxt"><b>GitHub Issue → merged PR</b> — AI reviewers, developer agents, QA, and security in a single flow.</div></div>
+        <div class="feature-row"><div class="dot"></div><div class="ftxt"><b>Automates code reviews</b> — catches bugs and regressions before humans do.</div></div>
+        <div class="feature-row"><div class="dot"></div><div class="ftxt"><b>Generates solutions</b> — not just suggestions; complete, testable implementations.</div></div>
+        <div class="feature-row"><div class="dot"></div><div class="ftxt"><b>Seamless human-in-the-loop</b> — escalates where judgment matters, autonomous where it doesn't.</div></div>
+      </div>
+      <div class="demo-card">
+        <div class="demo-label">Live Demo · Rhobots CoPilot</div>
+        <div class="demo-frame">
+          <iframe src="https://www.youtube-nocookie.com/embed/bok_9qaIvbA?rel=0&modestbranding=1" title="Rhobots CoPilot Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <a class="demo-btn" href="https://www.rhobots.ai/products/copilot" target="_blank" rel="noopener">Learn more about CoPilot</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 9: OUTCOMES -->
+  <section class="slide">
+    <div class="top-bar">
+      <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
+      <div class="slide-tag">09 / 10 · The Outcomes</div>
+    </div>
+    <div class="eyebrow">Imagine an AI World With…</div>
+    <h2 class="slide-h">Measurable outcomes,<br/>not marketing slides.</h2>
+
+    <div class="metric-grid">
+      <div class="metric">
+        <div class="num">100%</div>
+        <div class="lbl">Data Residency<br/><span style="color: var(--text-3);">Your data never leaves your perimeter.</span></div>
+      </div>
+      <div class="metric">
+        <div class="num">50%</div>
+        <div class="lbl">Fewer Errors<br/><span style="color: var(--text-3);">Purpose-built models, half the hallucinations.</span></div>
+      </div>
+      <div class="metric">
+        <div class="num">100%</div>
+        <div class="lbl">Ownership<br/><span style="color: var(--text-3);">You own the models, the weights, the IP.</span></div>
+      </div>
+      <div class="metric">
+        <div class="num">90%</div>
+        <div class="lbl">Cost Reduction<br/><span style="color: var(--text-3);">Small models, your infra, no rent-seeking.</span></div>
+      </div>
+    </div>
+
+    <div class="proof-strip">
+      <div>
+        <div class="proof-title">Proof point: Invoice Parser in production</div>
+        <div class="proof-body">A live deployment for an MSME invoice-financing customer. Rhobots beats GPT-4o on accuracy <b>and</b> speed <b>and</b> cost <b>and</b> data residency — all four, simultaneously.</div>
+      </div>
+      <div class="proof-stat">91% <small>vs GPT-4o at 83%</small></div>
+    </div>
+  </section>
+
+  <!-- SLIDE 10: CTA -->
+  <section class="slide closing">
+    <div class="cover-orb" style="left: -200px; right: auto; top: 20%;"></div>
+    <div class="top-bar">
+      <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
+      <div class="slide-tag">10 / 10 · Let's Talk</div>
+    </div>
+    <div style="margin-top: auto; margin-bottom: auto; position: relative; z-index: 1;">
+      <div class="eyebrow">Partnership</div>
+      <h1 class="title">Let's build the AI<br/><span class="grad">your enterprise actually needs.</span></h1>
+      <p class="lede" style="margin-top: 28px;">We don't sell hours. We deliver productized AI services with deep, long-term retainer engagements — multi-project, embedded with your teams, accountable for outcomes.</p>
+
+      <div class="cta-row" style="margin-top: 40px;">
+        <a class="cta primary" href="mailto:tech@rhobots.ai?subject=Rhobots%20Enterprise%20AI%20Discussion">Start a Conversation →</a>
+        <a class="cta ghost" href="https://www.rhobots.ai" target="_blank" rel="noopener">Explore rhobots.ai</a>
+      </div>
+
+      <div class="contact-grid">
+        <div class="item"><div class="k">Contact</div><div class="v"><a href="mailto:tech@rhobots.ai">tech@rhobots.ai</a></div></div>
+        <div class="item"><div class="k">Website</div><div class="v"><a href="https://www.rhobots.ai" target="_blank" rel="noopener">rhobots.ai</a></div></div>
+        <div class="item"><div class="k">Engagement</div><div class="v">Productized · Long-term retainer</div></div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Nav -->
+<div class="nav">
+  <button id="prev" title="Previous (←)" aria-label="Previous slide">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+  </button>
+  <div class="counter"><b id="curr">1</b> / <span id="total">10</span></div>
+  <button id="next" title="Next (→)" aria-label="Next slide">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+  </button>
+</div>
+
+<div class="help-hint">← → or Space to navigate</div>
+
+<script>
+  (function(){
+    var slides = document.querySelectorAll('.slide');
+    var total = slides.length;
+    var idx = 0;
+    var bar = document.getElementById('progressBar');
+    var curr = document.getElementById('curr');
+    var totalEl = document.getElementById('total');
+    var prevBtn = document.getElementById('prev');
+    var nextBtn = document.getElementById('next');
+    totalEl.textContent = total;
+
+    function render(){
+      slides.forEach(function(s, i){ s.classList.toggle('active', i === idx); });
+      curr.textContent = idx + 1;
+      bar.style.width = ((idx) / (total - 1) * 100) + '%';
+      prevBtn.disabled = idx === 0;
+      nextBtn.disabled = idx === total - 1;
+    }
+    function next(){ if(idx < total - 1){ idx++; render(); } }
+    function prev(){ if(idx > 0){ idx--; render(); } }
+
+    document.addEventListener('keydown', function(e){
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      if(['ArrowRight','PageDown',' '].includes(e.key)){ e.preventDefault(); next(); }
+      else if(['ArrowLeft','PageUp'].includes(e.key)){ e.preventDefault(); prev(); }
+      else if(e.key === 'Home'){ idx = 0; render(); }
+      else if(e.key === 'End'){ idx = total - 1; render(); }
+    });
+    prevBtn.addEventListener('click', prev);
+    nextBtn.addEventListener('click', next);
+
+    // Touch support
+    var touchStartX = 0;
+    document.addEventListener('touchstart', function(e){ touchStartX = e.touches[0].clientX; });
+    document.addEventListener('touchend', function(e){
+      var dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 50){ dx < 0 ? next() : prev(); }
+    });
+
+    render();
+  })();
+</script>
+
+</body>
+</html>

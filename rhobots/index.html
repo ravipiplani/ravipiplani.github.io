@@ -277,6 +277,47 @@
 
   .help-hint { position: fixed; bottom: 20px; right: 20px; font-size: 11px; color: var(--text-3); font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; }
 
+  /* === Impact slide (one metric per slide) === */
+  .impact-slide .impact-wrap { margin-top: 32px; }
+  .impact-sector { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 500; color: var(--text-2); margin-bottom: 36px; letter-spacing: -0.01em; }
+  .impact-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 200px;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+  }
+  .impact-cap { font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 28px; color: var(--text); margin-bottom: 36px; letter-spacing: -0.01em; line-height: 1.2; max-width: 900px; }
+  .impact-narrative { font-size: 18px; color: var(--text-2); line-height: 1.6; max-width: 820px; }
+  .impact-dots { display: flex; gap: 8px; margin-top: 28px; }
+  .impact-dots .d { width: 36px; height: 4px; border-radius: 2px; background: var(--border-strong); }
+  .impact-dots .d.on { background: linear-gradient(90deg, var(--accent), var(--accent-2)); box-shadow: 0 0 8px rgba(0,229,255,0.4); }
+
+  /* === Case study cards (kept for back-compat) === */
+  .case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 24px; flex: 1; align-content: start; }
+  .case-card {
+    background: linear-gradient(160deg, var(--surface), var(--surface-2));
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 26px 28px;
+    position: relative;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .case-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    opacity: 0.7;
+  }
+  .case-card .case-eye { font-family: 'Space Grotesk', sans-serif; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 12px; }
+  .case-card h4 { font-family: 'Space Grotesk', sans-serif; font-size: 19px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 14px; color: var(--text); line-height: 1.3; }
+  .case-card .case-impact { margin-top: auto; display: flex; align-items: baseline; gap: 14px; border-top: 1px solid var(--border); padding-top: 16px; }
+  .case-card .case-num { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 42px; line-height: 1; letter-spacing: -0.03em; background: linear-gradient(135deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; flex-shrink: 0; }
+  .case-card .case-cap { font-size: 13.5px; color: var(--text-2); line-height: 1.45; }
+
   /* === Vs Table === */
   .vs-table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 28px; }
   .vs-table th, .vs-table td { padding: 16px 20px; text-align: left; border-bottom: 1px solid var(--border); font-size: 15px; }
@@ -322,7 +363,7 @@
         <div class="brand-mark"></div>
         <div class="brand-name">RHOBOTS<span>.AI</span></div>
       </div>
-      <div class="slide-tag">01 / 10 · Cover</div>
+      <div class="slide-tag">01 / 14 · Cover</div>
     </div>
     <div style="margin-top: auto; margin-bottom: auto; position: relative; z-index: 1;">
       <div class="eyebrow">Enterprise AI Platform</div>
@@ -335,11 +376,75 @@
     </div>
   </section>
 
-  <!-- SLIDE 2: THE ENTERPRISE AI GAP -->
+  <!-- SLIDE 2: REAL IMPACT · LOGISTICS -->
+  <section class="slide impact-slide">
+    <div class="top-bar">
+      <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
+      <div class="slide-tag">02 / 14 · Real Impact · 1 of 4</div>
+    </div>
+    <div class="eyebrow">Real KPIs · Real Impact</div>
+    <div class="impact-wrap">
+      <div class="impact-sector">Logistics · India's largest</div>
+      <div class="impact-num">750+</div>
+      <div class="impact-cap">headcount saved over the next 3 years</div>
+      <p class="impact-narrative">Automating finance and operations end-to-end across the country's largest logistics network — on a trajectory to <b>750+ headcount</b> released from manual work over the next three years, with <b>300 saved in year one</b>.</p>
+      <div class="impact-dots"><div class="d on"></div><div class="d"></div><div class="d"></div><div class="d"></div></div>
+    </div>
+  </section>
+
+  <!-- SLIDE 3: REAL IMPACT · E-COMMERCE -->
+  <section class="slide impact-slide">
+    <div class="top-bar">
+      <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
+      <div class="slide-tag">03 / 14 · Real Impact · 2 of 4</div>
+    </div>
+    <div class="eyebrow">Real KPIs · Real Impact</div>
+    <div class="impact-wrap">
+      <div class="impact-sector">E-Commerce · India's top 10</div>
+      <div class="impact-num">15%</div>
+      <div class="impact-cap">targeted sales lift across millions of SKUs</div>
+      <p class="impact-narrative">Benchmarking <b>pricing competitiveness</b> and <b>product coverage</b> at catalog scale — surfacing the gaps that translate directly into top-line growth, targeting a <b>15% sales uplift</b>.</p>
+      <div class="impact-dots"><div class="d"></div><div class="d on"></div><div class="d"></div><div class="d"></div></div>
+    </div>
+  </section>
+
+  <!-- SLIDE 4: REAL IMPACT · INSURANCE -->
+  <section class="slide impact-slide">
+    <div class="top-bar">
+      <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
+      <div class="slide-tag">04 / 14 · Real Impact · 3 of 4</div>
+    </div>
+    <div class="eyebrow">Real KPIs · Real Impact</div>
+    <div class="impact-wrap">
+      <div class="impact-sector">Insurance · India's largest</div>
+      <div class="impact-num">80% ↓</div>
+      <div class="impact-cap">turnaround time · 100+ headcount cost saved</div>
+      <p class="impact-narrative">Automating <b>policy processing end-to-end</b> — cutting turnaround times by <b>80%</b> while releasing <b>100+ headcount</b> from the same operations workload.</p>
+      <div class="impact-dots"><div class="d"></div><div class="d"></div><div class="d on"></div><div class="d"></div></div>
+    </div>
+  </section>
+
+  <!-- SLIDE 5: REAL IMPACT · GOVERNMENT EPC -->
+  <section class="slide impact-slide">
+    <div class="top-bar">
+      <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
+      <div class="slide-tag">05 / 14 · Real Impact · 4 of 4</div>
+    </div>
+    <div class="eyebrow">Real KPIs · Real Impact</div>
+    <div class="impact-wrap">
+      <div class="impact-sector">Government Projects · Large EPC</div>
+      <div class="impact-num">5×</div>
+      <div class="impact-cap">growth on the same staff · +5% net margin</div>
+      <p class="impact-narrative">Automating <b>large-project design</b> for a leading partner to government — targeting a <b>5× growth</b> in project throughput on the same staff base, alongside a <b>+5% net margin</b> improvement.</p>
+      <div class="impact-dots"><div class="d"></div><div class="d"></div><div class="d"></div><div class="d on"></div></div>
+    </div>
+  </section>
+
+  <!-- SLIDE 3: THE ENTERPRISE AI GAP -->
   <section class="slide">
     <div class="top-bar">
       <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
-      <div class="slide-tag">02 / 10 · The Problem</div>
+      <div class="slide-tag">06 / 14 · The Problem</div>
     </div>
     <div class="eyebrow">The Enterprise AI Gap</div>
     <h2 class="slide-h">Generic LLMs are a B2C miracle.<br/>A B2B liability.</h2>
@@ -371,7 +476,7 @@
   <section class="slide">
     <div class="top-bar">
       <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
-      <div class="slide-tag">03 / 10 · Our Philosophy</div>
+      <div class="slide-tag">07 / 14 · Our Philosophy</div>
     </div>
     <div class="laap-hero">
       <div>
@@ -386,13 +491,16 @@
       </div>
       <div class="laap-visual">
         <div class="role-orbit">
-          <div class="role-bubble accent" style="top: 8%; left: 12%;">Underwriter</div>
-          <div class="role-bubble" style="top: 14%; right: 8%;">Analyst</div>
-          <div class="role-bubble accent" style="top: 44%; left: 0%;">Support Agent</div>
-          <div class="role-bubble" style="top: 48%; right: -2%;">Reviewer</div>
-          <div class="role-bubble accent" style="bottom: 18%; left: 14%;">QA Engineer</div>
-          <div class="role-bubble" style="bottom: 8%; right: 14%;">Ops Manager</div>
-          <div class="role-bubble" style="bottom: 26%; right: -4%;">Auditor</div>
+          <div class="role-bubble accent" style="top: 4%; left: 6%;">Loan Officer</div>
+          <div class="role-bubble" style="top: -2%; left: 42%;">Underwriter</div>
+          <div class="role-bubble accent" style="top: 6%; right: 4%;">Data Analyst</div>
+          <div class="role-bubble" style="top: 30%; left: -4%;">Support Agent</div>
+          <div class="role-bubble accent" style="top: 32%; right: -6%;">Reviewer</div>
+          <div class="role-bubble accent" style="bottom: 30%; left: -4%;">Developer</div>
+          <div class="role-bubble" style="bottom: 30%; right: -4%;">Auditor</div>
+          <div class="role-bubble" style="bottom: 6%; left: 6%;">Product Head</div>
+          <div class="role-bubble accent" style="bottom: -2%; left: 42%;">QA Engineer</div>
+          <div class="role-bubble" style="bottom: 4%; right: 4%;">Ops Manager</div>
           <div class="laap-core">LaaP</div>
         </div>
       </div>
@@ -403,11 +511,11 @@
   <section class="slide">
     <div class="top-bar">
       <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
-      <div class="slide-tag">04 / 10 · The Suite</div>
+      <div class="slide-tag">08 / 14 · The Suite</div>
     </div>
-    <div class="eyebrow">One Platform · Four Products</div>
-    <h2 class="slide-h">A complete enterprise AI stack —<br/>not a feature, not a chatbot.</h2>
-    <p class="lede" style="max-width: 760px;">Rhobots Studio is the foundation. Three production-grade products sit on top, each targeting a high-value enterprise workflow.</p>
+    <div class="eyebrow">Productized Services · Examples</div>
+    <h2 class="slide-h">We're a services company.<br/>These are some of our productized engagements.</h2>
+    <p class="lede" style="max-width: 820px;">Rhobots delivers AI as a service — embedded with your teams, accountable for outcomes. Many of our engagements get productized over time. Studio is our foundation; the rest are production-grade examples of what we ship.</p>
 
     <div class="suite-grid">
       <div class="suite-card foundation">
@@ -416,17 +524,17 @@
         <p class="sub">Single pane of glass for configuring AI, fine-tuning models, hosting LLMs, and enforcing governance across the org. Runs in your data center or private cloud.</p>
       </div>
       <div class="suite-card">
-        <div class="badge">Product · Workflow Automation</div>
+        <div class="badge">Productized Service · Workflow Automation</div>
         <h4>Rhobots Operator</h4>
         <p class="sub">Put your most time-consuming business processes on autopilot. Discovers inefficiencies, automates repetitive tasks, scales operations — without ripping out existing systems.</p>
       </div>
       <div class="suite-card">
-        <div class="badge">Product · Document AI</div>
+        <div class="badge">Productized Service · Document AI</div>
         <h4>Rhobots Extractor</h4>
         <p class="sub">Reads your documents, emails, and scanned files automatically — and turns them into clean, structured data ready for your business systems.</p>
       </div>
       <div class="suite-card">
-        <div class="badge">Product · Agentic Engineering</div>
+        <div class="badge">Productized Service · Agentic Engineering</div>
         <h4>Rhobots CoPilot</h4>
         <p class="sub">From GitHub Issue to production code — autonomously. A multi-agent pipeline of reviewers, developers, QA, and security. Human-in-the-loop when it matters.</p>
       </div>
@@ -437,7 +545,7 @@
   <section class="slide">
     <div class="top-bar">
       <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
-      <div class="slide-tag">05 / 10 · Studio</div>
+      <div class="slide-tag">09 / 14 · Studio</div>
     </div>
     <div class="product">
       <div class="product-meta">
@@ -463,7 +571,7 @@
   <section class="slide">
     <div class="top-bar">
       <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
-      <div class="slide-tag">06 / 10 · Operator</div>
+      <div class="slide-tag">10 / 14 · Operator</div>
     </div>
     <div class="product">
       <div class="product-meta">
@@ -487,7 +595,7 @@
   <section class="slide">
     <div class="top-bar">
       <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
-      <div class="slide-tag">07 / 10 · Extractor</div>
+      <div class="slide-tag">11 / 14 · Extractor</div>
     </div>
     <div class="product">
       <div class="product-meta">
@@ -513,7 +621,7 @@
   <section class="slide">
     <div class="top-bar">
       <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
-      <div class="slide-tag">08 / 10 · CoPilot</div>
+      <div class="slide-tag">12 / 14 · CoPilot</div>
     </div>
     <div class="product">
       <div class="product-meta">
@@ -539,7 +647,7 @@
   <section class="slide">
     <div class="top-bar">
       <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
-      <div class="slide-tag">09 / 10 · The Outcomes</div>
+      <div class="slide-tag">13 / 14 · The Outcomes</div>
     </div>
     <div class="eyebrow">Imagine an AI World With…</div>
     <h2 class="slide-h">Measurable outcomes,<br/>not marketing slides.</h2>
@@ -577,7 +685,7 @@
     <div class="cover-orb" style="left: -200px; right: auto; top: 20%;"></div>
     <div class="top-bar">
       <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
-      <div class="slide-tag">10 / 10 · Let's Talk</div>
+      <div class="slide-tag">14 / 14 · Let's Talk</div>
     </div>
     <div style="margin-top: auto; margin-bottom: auto; position: relative; z-index: 1;">
       <div class="eyebrow">Partnership</div>

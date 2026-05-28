@@ -186,6 +186,30 @@
     border: 0;
     z-index: 3;
   }
+  /* Clickable poster variant — opens YouTube in a new tab */
+  .demo-frame.demo-link {
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 200ms, box-shadow 200ms;
+  }
+  .demo-frame.demo-link img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    z-index: 0;
+  }
+  .demo-frame.demo-link::before {
+    z-index: 1;
+    background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.55) 100%);
+  }
+  .demo-frame.demo-link .play { z-index: 2; transition: transform 200ms, box-shadow 200ms; }
+  .demo-frame.demo-link:hover .play {
+    transform: scale(1.08);
+    box-shadow: 0 0 80px rgba(0,229,255,0.8), 0 16px 40px rgba(0,0,0,0.6);
+  }
+  .demo-frame.demo-link:hover { box-shadow: 0 0 0 1px var(--accent); }
   .demo-card a.demo-btn { display: inline-flex; align-items: center; gap: 10px; margin-top: 16px; padding: 12px 20px; background: var(--accent); color: var(--bg); text-decoration: none; border-radius: 10px; font-weight: 600; font-size: 14px; transition: background 200ms; }
   .demo-card a.demo-btn:hover { background: #4ef0ff; }
   .demo-card a.demo-btn::after { content: '→'; font-size: 16px; }
@@ -767,9 +791,10 @@
       </div>
       <div class="demo-card">
         <div class="demo-label">Live Demo · Rhobots Studio</div>
-        <div class="demo-frame">
-          <iframe src="https://www.youtube-nocookie.com/embed/-oODQSd9rLk?rel=0&modestbranding=1" title="Rhobots Studio Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        </div>
+        <a class="demo-frame demo-link" href="https://youtu.be/-oODQSd9rLk" target="_blank" rel="noopener" title="Watch Rhobots Studio on YouTube">
+          <img src="https://img.youtube.com/vi/-oODQSd9rLk/maxresdefault.jpg" alt="Rhobots Studio demo thumbnail" onerror="this.onerror=null;this.src='https://img.youtube.com/vi/-oODQSd9rLk/hqdefault.jpg'" />
+          <div class="play" aria-hidden="true"></div>
+        </a>
         <a class="demo-btn" href="https://www.rhobots.ai" target="_blank" rel="noopener">Learn more about Studio</a>
       </div>
     </div>
@@ -793,9 +818,10 @@
       </div>
       <div class="demo-card">
         <div class="demo-label">Live Demo · Rhobots Operator</div>
-        <div class="demo-frame">
-          <iframe src="https://www.youtube-nocookie.com/embed/euFaGa_raFE?rel=0&modestbranding=1" title="Rhobots Operator Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        </div>
+        <a class="demo-frame demo-link" href="https://youtu.be/euFaGa_raFE" target="_blank" rel="noopener" title="Watch Rhobots Operator on YouTube">
+          <img src="https://img.youtube.com/vi/euFaGa_raFE/maxresdefault.jpg" alt="Rhobots Operator demo thumbnail" onerror="this.onerror=null;this.src='https://img.youtube.com/vi/euFaGa_raFE/hqdefault.jpg'" />
+          <div class="play" aria-hidden="true"></div>
+        </a>
         <a class="demo-btn" href="https://www.rhobots.ai/products/operator" target="_blank" rel="noopener">Learn more about Operator</a>
       </div>
     </div>
@@ -819,9 +845,10 @@
       </div>
       <div class="demo-card">
         <div class="demo-label">Live Demo · Rhobots Extractor</div>
-        <div class="demo-frame">
-          <iframe src="https://www.youtube-nocookie.com/embed/Xh4PTe58sqM?rel=0&modestbranding=1" title="Rhobots Extractor Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        </div>
+        <a class="demo-frame demo-link" href="https://youtu.be/Xh4PTe58sqM" target="_blank" rel="noopener" title="Watch Rhobots Extractor on YouTube">
+          <img src="https://img.youtube.com/vi/Xh4PTe58sqM/maxresdefault.jpg" alt="Rhobots Extractor demo thumbnail" onerror="this.onerror=null;this.src='https://img.youtube.com/vi/Xh4PTe58sqM/hqdefault.jpg'" />
+          <div class="play" aria-hidden="true"></div>
+        </a>
         <a class="demo-btn" href="https://www.rhobots.ai/products/extract" target="_blank" rel="noopener">Learn more about Extractor</a>
       </div>
     </div>
@@ -845,9 +872,10 @@
       </div>
       <div class="demo-card">
         <div class="demo-label">Live Demo · Rhobots CoPilot</div>
-        <div class="demo-frame">
-          <iframe src="https://www.youtube-nocookie.com/embed/bok_9qaIvbA?rel=0&modestbranding=1" title="Rhobots CoPilot Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        </div>
+        <a class="demo-frame demo-link" href="https://youtu.be/bok_9qaIvbA" target="_blank" rel="noopener" title="Watch Rhobots CoPilot on YouTube">
+          <img src="https://img.youtube.com/vi/bok_9qaIvbA/maxresdefault.jpg" alt="Rhobots CoPilot demo thumbnail" onerror="this.onerror=null;this.src='https://img.youtube.com/vi/bok_9qaIvbA/hqdefault.jpg'" />
+          <div class="play" aria-hidden="true"></div>
+        </a>
         <a class="demo-btn" href="https://www.rhobots.ai/products/copilot" target="_blank" rel="noopener">Learn more about CoPilot</a>
       </div>
     </div>

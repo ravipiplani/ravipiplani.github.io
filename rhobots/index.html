@@ -405,6 +405,89 @@
   .vs-table td.them-val { color: var(--text-2); }
   .vs-table tr:hover td { background: rgba(255,255,255,0.02); }
 
+  /* === Team slide === */
+  .team-section { margin-top: 28px; }
+  .team-section + .team-section { margin-top: 22px; }
+  .team-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .team-grid { display: grid; gap: 18px; }
+  .team-grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .team-grid-1 { grid-template-columns: minmax(0, 560px); }
+  .team-card {
+    background: linear-gradient(180deg, var(--surface), var(--surface-2));
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px 26px 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 200ms, transform 200ms;
+  }
+  .team-card:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+  .team-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    opacity: 0.55;
+  }
+  .team-card.team-card-wide {
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 24px;
+  }
+  .team-avatar {
+    width: 64px; height: 64px; border-radius: 50%;
+    overflow: hidden;
+    background: var(--surface-2);
+    box-shadow:
+      0 0 0 2px rgba(0,229,255,0.32),
+      0 6px 20px rgba(0,0,0,0.4);
+    margin-bottom: 14px;
+    flex-shrink: 0;
+  }
+  .team-avatar img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .team-card.team-card-wide .team-avatar { margin-bottom: 0; flex-shrink: 0; }
+  .team-card-meta { flex: 1; }
+  .team-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .team-role {
+    font-size: 14px;
+    color: var(--text-2);
+    line-height: 1.4;
+  }
+  .team-link {
+    margin-top: 12px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 150ms;
+  }
+  .team-link:hover { color: var(--text); }
+  .team-card.team-card-wide .team-link { margin-top: 0; }
+
   /* === Small screens warning === */
   @media (max-width: 900px) {
     .slide { padding: 28px; }
@@ -439,7 +522,7 @@
         <div class="brand-mark"></div>
         <div class="brand-name">RHOBOTS<span>.AI</span></div>
       </div>
-      <div class="slide-tag">01 / 15 · Cover</div>
+      <div class="slide-tag">01 / 16 · Cover</div>
     </div>
     <div style="margin-top: auto; margin-bottom: auto; position: relative; z-index: 1;">
       <div class="eyebrow">Enterprise AI Platform</div>
@@ -456,7 +539,7 @@
   <section class="slide impact-slide">
     <div class="top-bar">
       <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
-      <div class="slide-tag">02 / 15 · Real Impact · 1 of 4</div>
+      <div class="slide-tag">02 / 16 · Real Impact · 1 of 4</div>
     </div>
     <div class="eyebrow">Real KPIs · Real Impact</div>
     <div class="impact-wrap">
@@ -472,7 +555,7 @@
   <section class="slide impact-slide">
     <div class="top-bar">
       <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
-      <div class="slide-tag">03 / 15 · Real Impact · 2 of 4</div>
+      <div class="slide-tag">03 / 16 · Real Impact · 2 of 4</div>
     </div>
     <div class="eyebrow">Real KPIs · Real Impact</div>
     <div class="impact-wrap">
@@ -488,7 +571,7 @@
   <section class="slide impact-slide">
     <div class="top-bar">
       <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
-      <div class="slide-tag">04 / 15 · Real Impact · 3 of 4</div>
+      <div class="slide-tag">04 / 16 · Real Impact · 3 of 4</div>
     </div>
     <div class="eyebrow">Real KPIs · Real Impact</div>
     <div class="impact-wrap">
@@ -504,7 +587,7 @@
   <section class="slide impact-slide">
     <div class="top-bar">
       <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
-      <div class="slide-tag">05 / 15 · Real Impact · 4 of 4</div>
+      <div class="slide-tag">05 / 16 · Real Impact · 4 of 4</div>
     </div>
     <div class="eyebrow">Real KPIs · Real Impact</div>
     <div class="impact-wrap">
@@ -516,11 +599,60 @@
     </div>
   </section>
 
-  <!-- SLIDE 3: THE ENTERPRISE AI GAP -->
+  <!-- SLIDE 6: TEAM -->
   <section class="slide">
     <div class="top-bar">
       <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
-      <div class="slide-tag">06 / 15 · The Problem</div>
+      <div class="slide-tag">06 / 16 · The Team</div>
+    </div>
+    <div class="eyebrow">The People Behind Rhobots</div>
+    <h2 class="slide-h">Built by operators<br/>who've shipped in production.</h2>
+    <p class="lede">A senior, founder-led team — embedded with customers, accountable for outcomes. Supported by experienced advisors on sales and business.</p>
+
+    <div class="team-section">
+      <div class="team-label">Founding Team</div>
+      <div class="team-grid team-grid-3">
+        <div class="team-card">
+          <div class="team-avatar"><img src="ravi.jpeg" alt="Ravi Piplani" /></div>
+          <h4 class="team-name">Ravi Piplani</h4>
+          <div class="team-role">Co-Founder</div>
+          <a class="team-link" href="https://linkedin.com/in/ravipiplani" target="_blank" rel="noopener">LinkedIn →</a>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar"><img src="gulshan.jpeg" alt="Gulshan" /></div>
+          <h4 class="team-name">Gulshan</h4>
+          <div class="team-role">Co-Founder</div>
+          <a class="team-link" href="https://www.linkedin.com/in/gulshany01/" target="_blank" rel="noopener">LinkedIn →</a>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar"><img src="rudresh.jpeg" alt="Rudresh Narwal" /></div>
+          <h4 class="team-name">Rudresh Narwal</h4>
+          <div class="team-role">Co-Founder</div>
+          <a class="team-link" href="https://www.linkedin.com/in/rudresh-narwal/" target="_blank" rel="noopener">LinkedIn →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="team-section">
+      <div class="team-label">Advisor</div>
+      <div class="team-grid team-grid-1">
+        <div class="team-card team-card-wide">
+          <div class="team-avatar"><img src="ashish.jpeg" alt="Ashish Gupta" /></div>
+          <div class="team-card-meta">
+            <h4 class="team-name">Ashish Gupta</h4>
+            <div class="team-role">Advisor — Sales &amp; Business</div>
+          </div>
+          <a class="team-link" href="https://www.linkedin.com/in/ashishgupta97065/" target="_blank" rel="noopener">LinkedIn →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 7: THE ENTERPRISE AI GAP -->
+  <section class="slide">
+    <div class="top-bar">
+      <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
+      <div class="slide-tag">07 / 16 · The Problem</div>
     </div>
     <div class="eyebrow">The Enterprise AI Gap</div>
     <h2 class="slide-h">Generic LLM Interfaces are a B2C miracle.<br/>A B2B liability.</h2>
@@ -552,7 +684,7 @@
   <section class="slide">
     <div class="top-bar">
       <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
-      <div class="slide-tag">07 / 15 · Our Philosophy</div>
+      <div class="slide-tag">08 / 16 · Our Philosophy</div>
     </div>
     <div class="laap-hero">
       <div>
@@ -587,7 +719,7 @@
   <section class="slide">
     <div class="top-bar">
       <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
-      <div class="slide-tag">08 / 15 · The Suite</div>
+      <div class="slide-tag">09 / 16 · The Suite</div>
     </div>
     <div class="eyebrow">Productized Services · Examples</div>
     <h2 class="slide-h">We're a services company.<br/>These are some of our productized engagements.</h2>
@@ -621,7 +753,7 @@
   <section class="slide">
     <div class="top-bar">
       <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
-      <div class="slide-tag">09 / 15 · Studio</div>
+      <div class="slide-tag">10 / 16 · Studio</div>
     </div>
     <div class="product">
       <div class="product-meta">
@@ -647,7 +779,7 @@
   <section class="slide">
     <div class="top-bar">
       <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
-      <div class="slide-tag">10 / 15 · Operator</div>
+      <div class="slide-tag">11 / 16 · Operator</div>
     </div>
     <div class="product">
       <div class="product-meta">
@@ -673,7 +805,7 @@
   <section class="slide">
     <div class="top-bar">
       <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
-      <div class="slide-tag">11 / 15 · Extractor</div>
+      <div class="slide-tag">12 / 16 · Extractor</div>
     </div>
     <div class="product">
       <div class="product-meta">
@@ -699,7 +831,7 @@
   <section class="slide">
     <div class="top-bar">
       <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
-      <div class="slide-tag">12 / 15 · CoPilot</div>
+      <div class="slide-tag">13 / 16 · CoPilot</div>
     </div>
     <div class="product">
       <div class="product-meta">
@@ -725,7 +857,7 @@
   <section class="slide">
     <div class="top-bar">
       <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
-      <div class="slide-tag">13 / 15 · CoPilot In Action</div>
+      <div class="slide-tag">14 / 16 · CoPilot In Action</div>
     </div>
     <div class="eyebrow">CoPilot · Inside the Pipeline</div>
     <h2 class="slide-h">From ticket to merged PR —<br/>every agent, every step, every cost.</h2>
@@ -781,7 +913,7 @@
   <section class="slide">
     <div class="top-bar">
       <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
-      <div class="slide-tag">14 / 15 · The Outcomes</div>
+      <div class="slide-tag">15 / 16 · The Outcomes</div>
     </div>
     <div class="eyebrow">Imagine an AI World With…</div>
     <h2 class="slide-h">Measurable outcomes,<br/>not marketing slides.</h2>
@@ -814,12 +946,12 @@
     </div>
   </section>
 
-  <!-- SLIDE 10: CTA -->
+  <!-- SLIDE 16: CTA -->
   <section class="slide closing">
     <div class="cover-orb" style="left: -200px; right: auto; top: 20%;"></div>
     <div class="top-bar">
       <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
-      <div class="slide-tag">15 / 15 · Let's Talk</div>
+      <div class="slide-tag">16 / 16 · Let's Talk</div>
     </div>
     <div style="margin-top: auto; margin-bottom: auto; position: relative; z-index: 1;">
       <div class="eyebrow">Partnership</div>

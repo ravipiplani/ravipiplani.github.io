@@ -49,7 +49,7 @@
   .slide.active { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); }
 
   /* === Header chrome === */
-  .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }
+  .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; width: 100%; }
   .brand { display: flex; align-items: center; gap: 12px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
   .brand-mark { width: 28px; height: 28px; border-radius: 8px; background: conic-gradient(from 180deg, var(--accent), var(--accent-2), var(--accent)); box-shadow: var(--glow); position: relative; }
   .brand-mark::after { content: ''; position: absolute; inset: 6px; border-radius: 4px; background: var(--bg); }
@@ -399,6 +399,82 @@
   .impact-dots .d { width: 36px; height: 4px; border-radius: 2px; background: var(--border-strong); }
   .impact-dots .d.on { background: linear-gradient(90deg, var(--accent), var(--accent-2)); box-shadow: 0 0 8px rgba(0,229,255,0.4); }
 
+  /* === Milestone / ARR slide === */
+  .milestone .ms-body { margin-top: 10px; }
+  .milestone .ms-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 150px;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 6px;
+  }
+  .milestone .ms-cap { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 34px; color: var(--text); margin-bottom: 18px; letter-spacing: -0.01em; }
+  .milestone .ms-narr { font-size: 18px; color: var(--text-2); line-height: 1.5; max-width: 760px; }
+  .ms-divider { height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); opacity: 0.85; margin-top: 30px; border-radius: 2px; }
+  .ms-strip { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 30px; }
+  .ms-stat { padding: 4px 30px; position: relative; }
+  .ms-stat:first-child { padding-left: 0; }
+  .ms-stat + .ms-stat::before { content: ''; position: absolute; left: 0; top: 2px; bottom: 2px; width: 1px; background: var(--border); }
+  .ms-stat .ms-stat-num { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 52px; line-height: 1; color: var(--accent); letter-spacing: -0.02em; margin-bottom: 12px; }
+  .ms-stat .ms-stat-lbl { font-size: 16px; color: var(--text); font-weight: 500; line-height: 1.3; margin-bottom: 12px; }
+  .ms-stat .ms-stat-sub { font-size: 13px; color: var(--text-3); line-height: 1.3; }
+
+  /* === GTM / Sales playbook slide === */
+  .gtm-flow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 30px; }
+  .gtm-step {
+    background: linear-gradient(160deg, var(--surface), var(--surface-2));
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 26px;
+    position: relative;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    transition: border-color 200ms, transform 200ms;
+  }
+  .gtm-step:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+  .gtm-step::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); opacity: 0.6; }
+  .gtm-step .gtm-step-num { font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 14px; }
+  .gtm-step h4 { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 10px; color: var(--text); }
+  .gtm-step p { font-size: 14.5px; color: var(--text-2); line-height: 1.5; }
+  .gtm-next {
+    margin-top: 20px;
+    background: linear-gradient(135deg, rgba(0,229,255,0.08), rgba(167,139,250,0.08));
+    border: 1px solid var(--border-strong);
+    border-radius: 16px;
+    padding: 24px 28px;
+    display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center;
+  }
+  .gtm-next .gtm-next-label { font-family: 'Space Grotesk', sans-serif; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-2); font-weight: 600; margin-bottom: 8px; }
+  .gtm-next .gtm-next-title { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 600; color: var(--text); letter-spacing: -0.01em; }
+  .gtm-next .gtm-next-sub { font-size: 14.5px; color: var(--text-2); line-height: 1.5; margin-top: 6px; max-width: 640px; }
+  .gtm-geo { display: flex; gap: 10px; flex-shrink: 0; }
+  .gtm-geo .geo-chip { font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 600; color: var(--text); padding: 12px 22px; border: 1px solid rgba(0,229,255,0.4); border-radius: 999px; background: var(--surface); white-space: nowrap; box-shadow: 0 0 18px rgba(0,229,255,0.12); }
+
+  /* === Funding ask slide === */
+  .ask-hero { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px; margin-top: 24px; align-items: start; }
+  .ask-amount { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 118px; line-height: 0.9; letter-spacing: -0.04em; background: linear-gradient(135deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .ask-sub { font-family: 'Space Grotesk', sans-serif; font-size: 16px; color: var(--text-2); margin-top: 12px; letter-spacing: 0.02em; }
+  .ask-narr { font-size: 17px; color: var(--text-2); line-height: 1.55; margin-top: 22px; max-width: 540px; }
+  .ask-narr b { color: var(--text); font-weight: 600; }
+  .ask-chip { display: inline-block; margin-top: 22px; font-family: 'Space Grotesk', sans-serif; font-size: 13.5px; font-weight: 600; color: var(--text); padding: 12px 18px; border: 1px solid rgba(0,229,255,0.4); border-radius: 999px; background: rgba(0,229,255,0.06); }
+  .uof { background: linear-gradient(160deg, var(--surface), var(--surface-2)); border: 1px solid var(--border-strong); border-radius: 18px; padding: 28px 30px; }
+  .uof-title { font-family: 'Space Grotesk', sans-serif; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-3); font-weight: 600; margin-bottom: 22px; }
+  .uof-row { margin-bottom: 20px; }
+  .uof-row:last-of-type { margin-bottom: 0; }
+  .uof-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 9px; }
+  .uof-head .lbl { font-size: 15px; color: var(--text); font-weight: 500; }
+  .uof-head .pct { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: var(--accent); }
+  .uof-track { height: 10px; background: rgba(255,255,255,0.06); border-radius: 999px; overflow: hidden; }
+  .uof-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); box-shadow: 0 0 12px rgba(0,229,255,0.3); }
+  .ask-buys-label { font-family: 'Space Grotesk', sans-serif; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-3); font-weight: 600; margin-top: 30px; margin-bottom: 16px; }
+  .ask-buys { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 36px; }
+  .ask-buys .buy { display: flex; gap: 11px; align-items: flex-start; font-size: 15px; color: var(--text-2); line-height: 1.4; }
+  .ask-buys .buy::before { content: '→'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+  .ask-buys .buy b { color: var(--text); font-weight: 600; }
+
   /* === Case study cards (kept for back-compat) === */
   .case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 24px; flex: 1; align-content: start; }
   .case-card {
@@ -501,6 +577,13 @@
     color: var(--text-2);
     line-height: 1.4;
   }
+  .team-bio {
+    font-size: 13px;
+    color: var(--text-3);
+    line-height: 1.45;
+    margin-top: 8px;
+  }
+  .team-card.team-card-wide .team-bio { margin-top: 4px; }
   .team-link {
     margin-top: 12px;
     font-family: 'Space Grotesk', sans-serif;
@@ -562,55 +645,6 @@
     </div>
   </section>
 
-  <!-- SLIDE 6: TEAM -->
-  <section class="slide">
-    <div class="top-bar">
-      <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
-      <div class="slide-tag">06 / 16 · The Team</div>
-    </div>
-    <div class="eyebrow">The People Behind Rhobots</div>
-    <h2 class="slide-h">Founder-led.<br/>Customer-embedded.</h2>
-    <p class="lede">A small, senior team that's shipped enterprise software in production. Accountable for outcomes inside customer accounts — not hours billed against statements of work.</p>
-
-    <div class="team-section">
-      <div class="team-label">Founding Team</div>
-      <div class="team-grid team-grid-3">
-        <div class="team-card">
-          <div class="team-avatar"><img src="ravi.jpeg" alt="Ravi Piplani" /></div>
-          <h4 class="team-name">Ravi Piplani</h4>
-          <div class="team-role">Co-Founder</div>
-          <a class="team-link" href="https://linkedin.com/in/ravipiplani" target="_blank" rel="noopener">LinkedIn →</a>
-        </div>
-        <div class="team-card">
-          <div class="team-avatar"><img src="gulshan.jpeg" alt="Gulshan" /></div>
-          <h4 class="team-name">Gulshan</h4>
-          <div class="team-role">Co-Founder</div>
-          <a class="team-link" href="https://www.linkedin.com/in/gulshany01/" target="_blank" rel="noopener">LinkedIn →</a>
-        </div>
-        <div class="team-card">
-          <div class="team-avatar"><img src="rudresh.jpeg" alt="Rudresh Narwal" /></div>
-          <h4 class="team-name">Rudresh Narwal</h4>
-          <div class="team-role">Co-Founder</div>
-          <a class="team-link" href="https://www.linkedin.com/in/rudresh-narwal/" target="_blank" rel="noopener">LinkedIn →</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="team-section">
-      <div class="team-label">Advisor</div>
-      <div class="team-grid team-grid-1">
-        <div class="team-card team-card-wide">
-          <div class="team-avatar"><img src="ashish.jpeg" alt="Ashish Gupta" /></div>
-          <div class="team-card-meta">
-            <h4 class="team-name">Ashish Gupta</h4>
-            <div class="team-role">Advisor — Sales &amp; Business</div>
-          </div>
-          <a class="team-link" href="https://www.linkedin.com/in/ashishgupta97065/" target="_blank" rel="noopener">LinkedIn →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- SLIDE 7: THE ENTERPRISE AI GAP -->
   <section class="slide">
     <div class="top-bar">
@@ -618,7 +652,7 @@
       <div class="slide-tag">07 / 16 · The Problem</div>
     </div>
     <div class="eyebrow">The Enterprise AI Gap</div>
-    <h2 class="slide-h">A trillion-dollar B2C category.<br/>No B2B winner.</h2>
+    <h2 class="slide-h">Brilliant in the browser.<br/>Broken in the enterprise.</h2>
     <p class="lede">ChatGPT-class models cracked consumer AI but break on enterprise contact. Three structural problems make this a deeply underserved market — and the wedge Rhobots is built around.</p>
 
     <div class="grid grid-3 problem" style="margin-top: 36px; flex: 1; align-content: start;">
@@ -641,6 +675,37 @@
         <p>Sending proprietary data into hosted, multi-tenant LLMs is a non-starter for any organization that takes its data seriously.</p>
       </div>
     </div>
+  </section>
+
+  <!-- SLIDE: MARKET / WHY NOW -->
+  <section class="slide">
+    <div class="top-bar">
+      <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
+      <div class="slide-tag">00 / 16 · Why Now</div>
+    </div>
+    <div class="eyebrow">Why Now · The Market</div>
+    <h2 class="slide-h">Software is starting to<br/>eat the labor budget.</h2>
+    <p class="lede">Enterprises spend roughly <b>$6 on services for every $1 on software</b>. The money in motion isn't the software budget — it's the far larger labor budget, and purpose-built AI is the first technology that can actually capture it. Rhobots sells into that budget directly: a role replaced, not a tool rented.</p>
+
+    <div class="metric-grid" style="margin-top: 36px;">
+      <div class="metric">
+        <div class="num">$6:$1</div>
+        <div class="lbl">Services-to-software enterprise spend<br/><span style="color: var(--text-3);">The budget AI is now unlocking.</span></div>
+      </div>
+      <div class="metric">
+        <div class="num">+75%</div>
+        <div class="lbl">Annual growth in enterprise LLM budgets<br/><span style="color: var(--text-3);">a16z enterprise CIO survey.</span></div>
+      </div>
+      <div class="metric">
+        <div class="num">61%</div>
+        <div class="lbl">Of global VC went to AI in 2025<br/><span style="color: var(--text-3);">Capital is concentrating here.</span></div>
+      </div>
+      <div class="metric">
+        <div class="num">SaS</div>
+        <div class="lbl">Services-as-Software<br/><span style="color: var(--text-3);">The thesis Rhobots already ships.</span></div>
+      </div>
+    </div>
+    <p class="body" style="margin-top: 20px; font-size: 12.5px; color: var(--text-3);">Sources: Sequoia (services-as-software), a16z enterprise AI surveys, OECD venture data · 2025–26.</p>
   </section>
 
   <!-- SLIDE 3: LAAP -->
@@ -678,8 +743,8 @@
     </div>
   </section>
 
-  <!-- SLIDE 9: PLATFORM + 4 PRODUCTS — HIDDEN (remove `hidden` attribute to restore) -->
-  <section class="slide" hidden>
+  <!-- SLIDE: PLATFORM + 4 PRODUCTS (Suite overview) -->
+  <section class="slide">
     <div class="top-bar">
       <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
       <div class="slide-tag">09 / 16 · The Suite</div>
@@ -876,112 +941,270 @@
     </div>
   </section>
 
-  <!-- SLIDE 14: OUTCOMES -->
+  <!-- SLIDE 14: MILESTONE · ARR -->
+  <section class="slide milestone">
+    <div class="top-bar">
+      <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
+      <div class="slide-tag">15 / 16 · Milestone</div>
+    </div>
+    <div class="ms-body">
+      <div class="eyebrow">From Zero · First 6 Months</div>
+      <div class="ms-num">$500K</div>
+      <div class="ms-cap">in contracted ARR</div>
+      <p class="ms-narr">Problem-first, not AI-first. We start with the process — not the model.</p>
+
+      <div class="ms-divider"></div>
+      <div class="ms-strip">
+        <div class="ms-stat">
+          <div class="ms-stat-num">80%</div>
+          <div class="ms-stat-lbl">less policy turnaround time</div>
+          <div class="ms-stat-sub">India's largest insurer</div>
+        </div>
+        <div class="ms-stat">
+          <div class="ms-stat-num">91%</div>
+          <div class="ms-stat-lbl">doc AI accuracy vs GPT-4o's 83%</div>
+          <div class="ms-stat-sub">MSME invoice financing</div>
+        </div>
+        <div class="ms-stat">
+          <div class="ms-stat-num">15%</div>
+          <div class="ms-stat-lbl">targeted sales lift</div>
+          <div class="ms-stat-sub">top-10 e-commerce</div>
+        </div>
+        <div class="ms-stat">
+          <div class="ms-stat-num">3</div>
+          <div class="ms-stat-lbl">enterprise customers</div>
+          <div class="ms-stat-sub">all recurring, all expanding</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE: PROOF IN PRODUCTION (consolidated) -->
   <section class="slide">
     <div class="top-bar">
       <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
-      <div class="slide-tag">15 / 16 · Traction &amp; Edge</div>
+      <div class="slide-tag">00 / 16 · Proof</div>
     </div>
-    <div class="eyebrow">Traction & Edge</div>
-    <h2 class="slide-h">Real revenue.<br/>A defensible edge across all four levers.</h2>
+    <div class="eyebrow">Real KPIs · In Production</div>
+    <h2 class="slide-h">Proof in production —<br/>marquee logos, early innings.</h2>
+    <p class="lede" style="max-width: 880px;">Three of India's largest enterprises and a government EPC partner, on land-and-expand contracts. Today's $500K ARR is the entry point — scope expands quarter over quarter.</p>
 
-    <div class="proof-strip" style="margin-top: 28px;">
+    <div class="case-grid">
+      <div class="case-card">
+        <div class="case-eye">Logistics · India's largest</div>
+        <h4>Finance &amp; operations automation, deployed across the network.</h4>
+        <div class="case-impact">
+          <div class="case-num">750+</div>
+          <div class="case-cap">roles freed over 3 years (300 in year one) · multi-year contracted, expanding.</div>
+        </div>
+      </div>
+      <div class="case-card">
+        <div class="case-eye">Insurance · India's largest</div>
+        <h4>End-to-end policy processing live in production.</h4>
+        <div class="case-impact">
+          <div class="case-num">80% ↓</div>
+          <div class="case-cap">policy turnaround time · 100+ roles freed from manual ops · recurring retainer.</div>
+        </div>
+      </div>
+      <div class="case-card">
+        <div class="case-eye">E-Commerce · India's top 10</div>
+        <h4>Catalog-scale pricing &amp; coverage benchmarking across millions of SKUs.</h4>
+        <div class="case-impact">
+          <div class="case-num">15%</div>
+          <div class="case-cap">targeted sales lift · top-line growth at SKU-level granularity.</div>
+        </div>
+      </div>
+      <div class="case-card">
+        <div class="case-eye">Government EPC · POC</div>
+        <h4>Large-project design automation with a leading EPC partner.</h4>
+        <div class="case-impact">
+          <div class="case-num">5×</div>
+          <div class="case-cap">projected throughput on the same staff · +5% net margin · converting to retainer.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE: BUSINESS MODEL -->
+  <section class="slide">
+    <div class="top-bar">
+      <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
+      <div class="slide-tag">00 / 16 · Business Model</div>
+    </div>
+    <div class="eyebrow">Business Model</div>
+    <h2 class="slide-h">Productized services.<br/>Software economics.</h2>
+    <p class="lede">We sell outcomes, not hours. A fixed 90-day engagement lands a production role-agent; it converts to a recurring annual retainer and expands as we automate the next role. The reusable IP underneath is what turns services revenue into software margin.</p>
+
+    <div class="gtm-flow">
+      <div class="gtm-step">
+        <div class="gtm-step-num">01 · Land</div>
+        <h4>90-day fixed engagement</h4>
+        <p>A shipping production role-agent in the customer's perimeter — an artefact, not a POC that dies in a deck.</p>
+      </div>
+      <div class="gtm-step">
+        <div class="gtm-step-num">02 · Expand</div>
+        <h4>Recurring retainer, growing scope</h4>
+        <p>Converts to an annual retainer. <b>ACV $80–150K</b> today and rising as each new role is automated on the same account.</p>
+      </div>
+      <div class="gtm-step">
+        <div class="gtm-step-num">03 · Compound</div>
+        <h4>Reusable IP lifts margin</h4>
+        <p>Every LaaP role-model and Studio component redeploys to the next client. Delivery cost falls; gross margin climbs with each reuse.</p>
+      </div>
+    </div>
+
+    <div class="gtm-next">
       <div>
-        <div class="proof-title">Current traction · Seed-stage proof</div>
-        <div class="proof-body"><b>₹2.5 Cr ARR</b> across <b>3 paying enterprise customers</b>. <b>₹4–5 Cr</b> active pipeline. Recurring retainer model with scope expansion on every account.</div>
+        <div class="gtm-next-label">Why it re-rates</div>
+        <div class="gtm-next-title">Build once. Redeploy many. Margin compounds.</div>
+        <div class="gtm-next-sub">Each engagement funds itself and hardens IP we resell at near-zero marginal cost — the path from a services multiple to a software multiple.</div>
       </div>
-      <div class="proof-stat">₹2.5 Cr<small>annual recurring revenue</small></div>
-    </div>
-
-    <div class="metric-grid">
-      <div class="metric">
-        <div class="num">100%</div>
-        <div class="lbl">Data Residency<br/><span style="color: var(--text-3);">Your data never leaves your perimeter.</span></div>
-      </div>
-      <div class="metric">
-        <div class="num">50%</div>
-        <div class="lbl">Fewer Errors<br/><span style="color: var(--text-3);">Purpose-built models, half the hallucinations.</span></div>
-      </div>
-      <div class="metric">
-        <div class="num">100%</div>
-        <div class="lbl">Ownership<br/><span style="color: var(--text-3);">You own the models, the weights, the IP.</span></div>
-      </div>
-      <div class="metric">
-        <div class="num">90%</div>
-        <div class="lbl">Cost Reduction<br/><span style="color: var(--text-3);">Small models, your infra, no rent-seeking.</span></div>
+      <div class="gtm-geo">
+        <span class="geo-chip">$80–150K ACV</span>
+        <span class="geo-chip">Recurring</span>
+        <span class="geo-chip">Expanding</span>
       </div>
     </div>
+  </section>
 
-    <div class="proof-strip">
+  <!-- SLIDE: GO-TO-MARKET -->
+  <section class="slide gtm">
+    <div class="top-bar">
+      <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
+      <div class="slide-tag">00 / 16 · Go-To-Market</div>
+    </div>
+    <div class="eyebrow">Go-To-Market</div>
+    <h2 class="slide-h">A repeatable sales engine —<br/>built to travel.</h2>
+    <p class="lede">Three motions, proven in India to $500K ARR. Founder-led, decision-maker-direct, and deliberately low-cost. The same engine is now being pointed at overseas markets.</p>
+
+    <div class="gtm-flow">
+      <div class="gtm-step">
+        <div class="gtm-step-num">01 · Network</div>
+        <h4>Mine the warm graph</h4>
+        <p>Start inside the founders' and team's existing relationships — surface decision-maker access first, so we rarely start cold.</p>
+      </div>
+      <div class="gtm-step">
+        <div class="gtm-step-num">02 · Referrals</div>
+        <h4>References from live customers</h4>
+        <p>Every deployed account becomes a reference engine — named intros and in-region proof that close the next account faster.</p>
+      </div>
+      <div class="gtm-step">
+        <div class="gtm-step-num">03 · Outbound</div>
+        <h4>LinkedIn outbound playbook</h4>
+        <p>Researched cold-to-in-person cadence: connect → cost-led message → deck → proof → meeting. ~5–8 high-research accounts per week.</p>
+      </div>
+    </div>
+
+    <div class="gtm-next">
       <div>
-        <div class="proof-title">Head-to-head proof: Invoice Parser vs. GPT-4o</div>
-        <div class="proof-body">Live deployment for an MSME invoice-financing customer. Rhobots beats GPT-4o on accuracy <b>and</b> speed <b>and</b> cost <b>and</b> data residency — all four levers, simultaneously. The wedge in numbers.</div>
+        <div class="gtm-next-label">Next — Geographic Replication</div>
+        <div class="gtm-next-title">Same playbook, overseas beachhead.</div>
+        <div class="gtm-next-sub">Re-run the proven engine across three priority English-language markets — founder-led, cost-led wedge, cold-to-in-person close. One nameable in-region reference unlocks the rest.</div>
       </div>
-      <div class="proof-stat">91% <small>vs GPT-4o at 83%</small></div>
+      <div class="gtm-geo">
+        <span class="geo-chip">US</span>
+        <span class="geo-chip">UK</span>
+        <span class="geo-chip">UAE</span>
+      </div>
     </div>
   </section>
 
-  <!-- REAL IMPACT · LOGISTICS -->
-  <section class="slide impact-slide">
+  <!-- SLIDE: TEAM -->
+  <section class="slide">
     <div class="top-bar">
       <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
-      <div class="slide-tag">00 / 16 · Real Impact · 1 of 4</div>
+      <div class="slide-tag">00 / 16 · The Team</div>
     </div>
-    <div class="eyebrow">Real KPIs · Real Impact</div>
-    <div class="impact-wrap">
-      <div class="impact-sector">Logistics · India's largest</div>
-      <div class="impact-num">750+</div>
-      <div class="impact-cap">3-year displacement target · 300 in year one</div>
-      <p class="impact-narrative">Live deployment at the country's largest logistics network — finance and operations automation underway. <b>3-year target: 750+ headcount displaced</b>, with <b>300 in year one</b>. Multi-year contracted engagement, scope expanding quarter over quarter.</p>
-      <div class="impact-dots"><div class="d on"></div><div class="d"></div><div class="d"></div><div class="d"></div></div>
+    <div class="eyebrow">The People Behind Rhobots</div>
+    <h2 class="slide-h">Founder-led.<br/>Customer-embedded.</h2>
+    <p class="lede">A small, senior team that's shipped enterprise software in production. Accountable for outcomes inside customer accounts — not hours billed against statements of work.</p>
+
+    <div class="team-section">
+      <div class="team-label">Founding Team</div>
+      <div class="team-grid team-grid-3">
+        <div class="team-card">
+          <div class="team-avatar"><img src="ravi.jpeg" alt="Ravi Piplani" /></div>
+          <h4 class="team-name">Ravi Piplani</h4>
+          <div class="team-role">Co-Founder &amp; CEO</div>
+          <div class="team-bio">Commercial, customers &amp; capital — runs GTM and the raise.</div>
+          <a class="team-link" href="https://linkedin.com/in/ravipiplani" target="_blank" rel="noopener">LinkedIn →</a>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar"><img src="gulshan.jpeg" alt="Gulshan" /></div>
+          <h4 class="team-name">Gulshan</h4>
+          <div class="team-role">Co-Founder &amp; R&amp;D Lead</div>
+          <div class="team-bio">IIT Jodhpur · M.Tech in AI · model fine-tuning lead.</div>
+          <a class="team-link" href="https://www.linkedin.com/in/gulshany01/" target="_blank" rel="noopener">LinkedIn →</a>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar"><img src="rudresh.jpeg" alt="Rudresh Narwal" /></div>
+          <h4 class="team-name">Rudresh Narwal</h4>
+          <div class="team-role">Co-Founder &amp; Client Excellence</div>
+          <div class="team-bio">IIT Roorkee · owns delivery &amp; customer success.</div>
+          <a class="team-link" href="https://www.linkedin.com/in/rudresh-narwal/" target="_blank" rel="noopener">LinkedIn →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="team-section">
+      <div class="team-label">Advisor</div>
+      <div class="team-grid team-grid-1">
+        <div class="team-card team-card-wide">
+          <div class="team-avatar"><img src="ashish.jpeg" alt="Ashish Gupta" /></div>
+          <div class="team-card-meta">
+            <h4 class="team-name">Ashish Gupta</h4>
+            <div class="team-role">Advisor — Sales &amp; Business</div>
+            <div class="team-bio">IIT Delhi · 25 years across sales &amp; technology.</div>
+          </div>
+          <a class="team-link" href="https://www.linkedin.com/in/ashishgupta97065/" target="_blank" rel="noopener">LinkedIn →</a>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- REAL IMPACT · E-COMMERCE -->
-  <section class="slide impact-slide">
+  <!-- SLIDE: THE ASK -->
+  <section class="slide ask">
     <div class="top-bar">
       <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
-      <div class="slide-tag">00 / 16 · Real Impact · 2 of 4</div>
+      <div class="slide-tag">00 / 16 · The Ask</div>
     </div>
-    <div class="eyebrow">Real KPIs · Real Impact</div>
-    <div class="impact-wrap">
-      <div class="impact-sector">E-Commerce · India's top 10</div>
-      <div class="impact-num">15%</div>
-      <div class="impact-cap">targeted sales lift across millions of SKUs</div>
-      <p class="impact-narrative">Deployed catalog-scale benchmarking of <b>pricing competitiveness</b> and <b>product coverage</b> for a top-10 Indian e-commerce platform. Translates directly into top-line growth at SKU-level granularity.</p>
-      <div class="impact-dots"><div class="d"></div><div class="d on"></div><div class="d"></div><div class="d"></div></div>
-    </div>
-  </section>
+    <div class="eyebrow">The Ask</div>
+    <h2 class="slide-h">Raising $2M to scale a compounding engine.</h2>
 
-  <!-- REAL IMPACT · INSURANCE -->
-  <section class="slide impact-slide">
-    <div class="top-bar">
-      <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
-      <div class="slide-tag">00 / 16 · Real Impact · 3 of 4</div>
+    <div class="ask-hero">
+      <div class="ask-left">
+        <div class="ask-amount">$2M</div>
+        <div class="ask-sub">Seed · 12-month runway · focused raise</div>
+        <p class="ask-narr">Productized services that <b>compound</b>. Every engagement hardens reusable IP — Studio plus a growing library of LaaP role-models — that we redeploy to the next client at <b>higher margin</b>. Services-as-software, in production today.</p>
+        <span class="ask-chip">Build once · redeploy many · margin compounds per client</span>
+      </div>
+      <div class="uof">
+        <div class="uof-title">Use of Funds</div>
+        <div class="uof-row">
+          <div class="uof-head"><span class="lbl">Forward-deployed delivery</span><span class="pct">35%</span></div>
+          <div class="uof-track"><div class="uof-fill" style="width: 35%;"></div></div>
+        </div>
+        <div class="uof-row">
+          <div class="uof-head"><span class="lbl">Overseas GTM · US · UK · UAE</span><span class="pct">30%</span></div>
+          <div class="uof-track"><div class="uof-fill" style="width: 30%;"></div></div>
+        </div>
+        <div class="uof-row">
+          <div class="uof-head"><span class="lbl">Product &amp; reusable IP</span><span class="pct">25%</span></div>
+          <div class="uof-track"><div class="uof-fill" style="width: 25%;"></div></div>
+        </div>
+        <div class="uof-row">
+          <div class="uof-head"><span class="lbl">G&amp;A &amp; buffer</span><span class="pct">10%</span></div>
+          <div class="uof-track"><div class="uof-fill" style="width: 10%;"></div></div>
+        </div>
+      </div>
     </div>
-    <div class="eyebrow">Real KPIs · Real Impact</div>
-    <div class="impact-wrap">
-      <div class="impact-sector">Insurance · India's largest</div>
-      <div class="impact-num">80% ↓</div>
-      <div class="impact-cap">policy turnaround time · 100+ headcount displaced</div>
-      <p class="impact-narrative">End-to-end policy processing live in production at the country's largest insurer. <b>80%</b> TAT reduction. <b>100+ headcount</b> released from manual ops. Recurring retainer with deepening scope.</p>
-      <div class="impact-dots"><div class="d"></div><div class="d"></div><div class="d on"></div><div class="d"></div></div>
-    </div>
-  </section>
 
-  <!-- REAL IMPACT · GOVERNMENT EPC -->
-  <section class="slide impact-slide">
-    <div class="top-bar">
-      <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
-      <div class="slide-tag">00 / 16 · Real Impact · 4 of 4</div>
-    </div>
-    <div class="eyebrow">Real KPIs · Real Impact</div>
-    <div class="impact-wrap">
-      <div class="impact-sector">Government Projects · Large EPC</div>
-      <div class="impact-num">5×</div>
-      <div class="impact-cap">projected throughput · +5% net margin · POC in progress</div>
-      <p class="impact-narrative">Active POC with a leading EPC partner to government on large-project design automation. Projected outcome: <b>5× project throughput</b> on the same staff base, <b>+5% net margin</b>. Conversion to long-term retainer on POC validation.</p>
-      <div class="impact-dots"><div class="d"></div><div class="d"></div><div class="d"></div><div class="d on"></div></div>
+    <div class="ask-buys-label">What $2M unlocks · 12 months</div>
+    <div class="ask-buys">
+      <div class="buy"><span><b>$500K → $2M ARR</b> — a 4× year on a proven engine.</span></div>
+      <div class="buy"><span><b>2–3 nameable overseas references</b> across US, UK &amp; UAE.</span></div>
+      <div class="buy"><span><b>Reusable model library</b> — every redeploy lifts gross margin.</span></div>
+      <div class="buy"><span><b>Series A-ready</b> — on a software multiple, not a services one.</span></div>
     </div>
   </section>
 
@@ -990,22 +1213,22 @@
     <div class="cover-orb" style="left: -200px; right: auto; top: 20%;"></div>
     <div class="top-bar">
       <div class="brand"><div class="brand-mark"></div><div class="brand-name">RHOBOTS<span>.AI</span></div></div>
-      <div class="slide-tag">16 / 16 · Let's Talk</div>
+      <div class="slide-tag">16 / 16 · The Round</div>
     </div>
     <div style="margin-top: auto; margin-bottom: auto; position: relative; z-index: 1;">
-      <div class="eyebrow">Let's Talk</div>
-      <h1 class="title">A category in motion.<br/><span class="grad">A team built to win it.</span></h1>
-      <p class="lede" style="margin-top: 28px;">Building a deeply-technical, India-built, globally-deployable enterprise AI company. Happy to share more on the customers, the roadmap, and where the business is headed.</p>
+      <div class="eyebrow">We're Raising</div>
+      <h1 class="title">$2M to take a proven engine<br/><span class="grad">global.</span></h1>
+      <p class="lede" style="margin-top: 28px;">$500K ARR, three enterprise customers, and a compounding services-as-software model — in production today. We're raising a $2M seed to replicate it across the US, UK &amp; UAE. Let's talk.</p>
 
       <div class="cta-row" style="margin-top: 40px;">
-        <a class="cta primary" href="mailto:tech@rhobots.ai?subject=Rhobots%20Conversation">Start a Conversation →</a>
+        <a class="cta primary" href="mailto:tech@rhobots.ai?subject=Rhobots%20%E2%80%94%20%242M%20Seed%20Round">Discuss the round →</a>
         <a class="cta ghost" href="https://www.rhobots.ai" target="_blank" rel="noopener">Explore rhobots.ai</a>
       </div>
 
       <div class="contact-grid">
         <div class="item"><div class="k">Contact</div><div class="v"><a href="mailto:tech@rhobots.ai">tech@rhobots.ai</a></div></div>
-        <div class="item"><div class="k">Website</div><div class="v"><a href="https://www.rhobots.ai" target="_blank" rel="noopener">rhobots.ai</a></div></div>
-        <div class="item"><div class="k">Engagement</div><div class="v">Productized · Long-term retainer</div></div>
+        <div class="item"><div class="k">Raising</div><div class="v">$2M Seed · 12-month runway</div></div>
+        <div class="item"><div class="k">Traction</div><div class="v">$500K ARR · 3 customers</div></div>
       </div>
     </div>
   </section>
